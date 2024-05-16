@@ -1,0 +1,63 @@
+.leftPane{
+    -fx-background-color: #4770ff;
+}
+.textTitulo{
+    -fx-text-fill: #4770ff;
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+    -fx-text-align: right;
+}
+.rightPane{
+    -fx-background-color: white;
+}
+.subTitulo{
+    -fx-text-fill: #4770ff;
+    -fxfont-size: 14px;
+    -fxfont-family: "Roboto";
+    -fxtext-align: right;
+}
+.txtBienvenida{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
+.txtInstr{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 12px;
+    -fx-font-family: "Roboto";
+}
+.btnIngreso{
+    -fx-cursor:  pointer;
+    -fx-border-width: 0px;
+    -fxborder-radius: 4px;
+    -fx-background-color: #030303;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
+.txtField-Custom{
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: #a9a9a9; /* Color del borde */
+    -fx-border-width: 1px; /* Ancho del borde */
+    -fx-border-radius: 1px; /* Radio del borde */
+}
+.txtT1{
+    -fx-text-fill: #f9fafe;
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+    -fx-text-alignment: center;
+    -fx-line-spacing: -5px;
+}
+.txtT2{
+    -fx-text-fill: #f9fafe;
+    -fx-font-size: 12px;
+    -fx-font-family: "Roboto";
+    -fx-text-alignment: center;
+    -fx-line-spacing: 1px;
+}
