@@ -1,0 +1,104 @@
+.menuLateral{
+    -fx-background-color: #f8f9fa;
+}
+.menuPrincipal{
+    -fx-background-color: white;
+}
+.txtTitulo{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 800;
+}
+.btnMenu{
+    -fx-background-color: #f8f9fa;
+    -fx-text-fill: #55595f;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-font-family: "Roboto";
+    -fx-border-width: 0px;
+    -fx-cursor: pointer;
+}
+.btnMenuActive{
+    -fx-background-color: #f8f9fa;
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+    -fx-border-width: 0px;
+    -fx-cursor: pointer;
+}
+.txtTituloDash{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 18px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
+.txtsubTituloDash{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 14px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
+.cbMovimiento{
+    -fx-cursor: pointer;
+    -fx-padding: 0px 8px;
+    -fx-border-width: 0px;
+    -fx-background-color: #1e1f26;
+    -fx-text-fill: #f9fafe;
+    -fx-font-size: 12px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+    -fx-outline: none;
+}
+.panePresupuesto{
+    -fx-background-color: #1e1f26;
+}
+.txtPresupuesto{
+    -fx-text-fill: #f9fafe;
+    -fx-font-size: 12px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
+.txtBalance{
+    -fx-text-fill: #f9fafe;
+    -fx-font-size: 10px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
+.txtNumBalance{
+    -fx-text-fill: #b5f2e5;
+    -fx-font-size: 18px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
+.txtGenerico{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 12px;
+    -fx-font-family: "Roboto";
+}
+.txtTituloCampo{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 12px;
+    -fx-font-family: "Roboto";
+}
+.textBoxCampo{
+    -fx-background-color: #ffffff;
+    -fx-padding: 0px 8px;
+    -fx-border-width: 1px;
+    -fx-border-color: #cfcfd0;
+    -fx-font: 12px "Roboto";
+    -fx-text-fill: #707071;
+    -fx-pref-height: 30px;
+    -fx-border-radius: 2px;
+}
+.btnIngreso{
+    -fx-cursor:  pointer;
+    -fx-border-width: 0px;
+    -fxborder-radius: 4px;
+    -fx-background-color: #030303;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
