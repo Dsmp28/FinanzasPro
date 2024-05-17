@@ -44,7 +44,7 @@
                         <TextField fx:id="txtCorreo" prefWidth="258.0" promptText="ejemplo@dominio.com" styleClass="txtField-Custom" />
                         <Label styleClass="txtInstr" text="Ingrese su presupuesto inicial (obligatorio)" />
                         <TextField fx:id="txtPresupuesto" promptText="0000.00" styleClass="txtField-Custom" />
-                        <Button fx:id="btnIngreso" alignment="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="258.0" styleClass="btnIngreso" text="Ingresar" textAlignment="CENTER" />
+                        <Button fx:id="btnIngreso" alignment="CENTER" mnemonicParsing="false" onAction="#btnIngresarClick" prefHeight="34.0" prefWidth="258.0" styleClass="btnIngreso" text="Ingresar" textAlignment="CENTER" />
                      </children>
                   </VBox>
                </children>

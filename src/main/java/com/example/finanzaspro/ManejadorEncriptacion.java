@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ManejadorEncriptacion {
+
     public static void guardarPresupuestoEnJSON(double monto, String archivoJSON) {
         File file = new File(archivoJSON);
         if (!file.exists()) {
@@ -129,5 +130,48 @@ public class ManejadorEncriptacion {
             e.printStackTrace();
         }
         return movimientos;
+    }
+
+    public static void guardarCorreoEnJSON(String correo, String archivoJSON) {
+        File file = new File(archivoJSON);
+        if (!file.exists()) {
+            System.err.println("El archivo JSON no existe: " + archivoJSON);
+            return;
+        }
+
+        try {
+            String correoEncriptado = EncryptionUtil.encrypt(correo);
+            Map<String, String> datos = new HashMap<>();
+            datos.put("correo", correoEncriptado);
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            try (FileWriter writer = new FileWriter(file, false)) { // `false` para no agregar sino sobreescribir
+                gson.toJson(datos, writer);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String leerCorreoDeJSON(String archivoJSON) {
+        File file = new File(archivoJSON);
+        if (!file.exists()) {
+            System.err.println("El archivo JSON no existe: " + archivoJSON);
+            return null;
+        }
+
+        String correo = null;
+        try (FileReader reader = new FileReader(file)) {
+            JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
+            if (jsonObject.has("correo")) {
+                String correoEncriptado = jsonObject.get("correo").getAsString();
+                correo = EncryptionUtil.decrypt(correoEncriptado);
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo JSON: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error al desencriptar el correo: " + e.getMessage());
+        }
+        return correo;
     }
 }
