@@ -25,7 +25,7 @@ public class HelloApplication extends Application {
 
     private void MostrarFormLogIn(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("inicio-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 720, 550);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 550);
         stage.setTitle("FinanzasProLogIn");
         stage.setScene(scene);
         String css = this.getClass().getResource("style.css").toExternalForm();
@@ -35,7 +35,7 @@ public class HelloApplication extends Application {
 
     private void MostrarFormDashBoard(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dashboard-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 720, 550);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 550);
         stage.setTitle("FinanzasProDashBoard");
         stage.setScene(scene);
         String css = this.getClass().getResource("styledashboard.css").toExternalForm();
