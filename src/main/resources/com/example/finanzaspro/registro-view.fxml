@@ -54,7 +54,7 @@
                   <CheckBox fx:id="cbRecurrente" mnemonicParsing="false" prefHeight="20.0" prefWidth="219.0" text="Pago Recurrente" />
                   <VBox prefHeight="100.0" prefWidth="209.0">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="164.0" styleClass="txtTituloCampo" text="¿Cada cuantos días se paga?" />
+                        <Label fx:id="labelDias" prefHeight="18.0" prefWidth="164.0" styleClass="txtTituloCampo" text="¿Cada cuantos días se paga?" />
                         <TextField fx:id="txtDias" prefHeight="30.0" prefWidth="434.0" promptText="Número de días" styleClass="textBoxCampo" />
                      </children>
                   </VBox>
