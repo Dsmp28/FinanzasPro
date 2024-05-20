@@ -38,6 +38,7 @@ public class InicioController {
                     ManejadorEncriptacion.guardarPresupuestoEnJSON(monto, "DatoPresupuesto.json");
                     ManejadorEncriptacion.guardarCorreoEnJSON(correo, "DatoCorreo.json");
                     ManejadorAlertas.showInformation("Éxito", "Presupuesto guardado", "El presupuesto se ha guardado correctamente");
+                    abrirDashboard();
                 }
             } catch (NumberFormatException e) {
                 ManejadorAlertas.showError("Error", "Presupuesto inválido", "El presupuesto debe ser un número válido");
@@ -52,5 +53,16 @@ public class InicioController {
         return matcher.matches();
     }
 
+    public void abrirDashboard(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard-view.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

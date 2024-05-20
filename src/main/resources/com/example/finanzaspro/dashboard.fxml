@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" stylesheets="@styledashboard.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finanzaspro.dashboardC">
+   <children>
+      <Label layoutX="33.0" layoutY="33.0" styleClass="txtTituloDash" text="Dashboard" />
+      <Pane layoutX="33.0" layoutY="75.0" prefHeight="122.0" prefWidth="412.0" styleClass="dashPresupuesto">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="txtTituloPane" text="Presupuesto total" />
+            <Label fx:id="txtPresupuesto" layoutX="14.0" layoutY="31.0" styleClass="labelPresupuesto" text="USD 10,000.00" />
+            <VBox layoutX="14.0" layoutY="69.0" prefHeight="35.0" prefWidth="103.0">
+               <children>
+                  <Label styleClass="txtIngGas" text="Ingresado">
+                     <graphic>
+                        <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/arriba.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label fx:id="txtIngresado" prefHeight="20.0" prefWidth="104.0" styleClass="txtNumIngGas" text="USD 30,000.00" />
+               </children>
+            </VBox>
+            <VBox fx:id="VBoxMovimientos" layoutX="117.0" layoutY="69.0" prefHeight="35.0" prefWidth="103.0">
+               <children>
+                  <Label styleClass="txtIngGas" text="Gasto">
+                     <graphic>
+                        <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/abajo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label fx:id="txtGasto" prefHeight="20.0" prefWidth="104.0" styleClass="txtNumIngGas" text="USD 20,000.00" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane layoutX="33.0" layoutY="216.0" prefHeight="167.0" prefWidth="412.0" styleClass="dashEstadistica">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="txtEstadistica" text="Estadísticas" />
+         </children>
+      </Pane>
+      <Pane layoutX="33.0" layoutY="404.0" prefHeight="112.0" prefWidth="200.0" styleClass="dashInversion">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="txtTituloPane" text="Inversión" />
+         </children>
+      </Pane>
+      <Pane layoutX="245.0" layoutY="404.0" prefHeight="112.0" prefWidth="200.0" styleClass="dashCategoria">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="txtTituloPane" text="Gastos recurrentes" />
+         </children>
+      </Pane>
+      <Pane layoutX="461.0" layoutY="404.0" prefHeight="111.0" prefWidth="264.0" styleClass="dashRecordatorios">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="txtTituloPane" text="Recordatorios" />
+         </children>
+      </Pane>
+      <Pane layoutX="461.0" layoutY="56.0" prefHeight="328.0" prefWidth="264.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="txtTitMovimientos" text="Movimientos Recientes" />
+            <Button fx:id="btnCompleto" layoutX="194.0" layoutY="14.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="64.0" styleClass="btnVerTodos" text="Ver todos" textAlignment="RIGHT">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <HBox layoutX="6.0" layoutY="42.0" prefHeight="22.0" prefWidth="152.0">
+               <children>
+                  <Button fx:id="btnTodos" mnemonicParsing="false" prefHeight="22.0" prefWidth="46.0" styleClass="btnVerTodos" text="Todos" textAlignment="RIGHT">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="btnGastos" mnemonicParsing="false" prefHeight="22.0" prefWidth="47.0" styleClass="btnVerTodos" text="Gastos" textAlignment="RIGHT">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="btnIngresos" mnemonicParsing="false" prefHeight="22.0" prefWidth="52.0" styleClass="btnVerTodos" text="Ingresos" textAlignment="RIGHT">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children>
+            </HBox>
+            <VBox layoutX="14.0" layoutY="64.0" prefHeight="254.0" prefWidth="235.0" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

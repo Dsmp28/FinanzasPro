@@ -2,170 +2,72 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="950.0" styleClass="menuPrincipal" stylesheets="@styleregistro.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finanzaspro.RegistroController">
+<Pane prefHeight="550.0" prefWidth="750.0" stylesheets="@styleregistro.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finanzaspro.RegistroController">
    <children>
-      <BorderPane prefHeight="550.0" prefWidth="950.0">
-         <left>
-            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="menuLateral" BorderPane.alignment="CENTER">
+      <Label layoutX="33.0" layoutY="33.0" styleClass="txtTituloDash" text="Registrar Movimiento" />
+      <Label layoutX="33.0" layoutY="83.0" prefHeight="20.0" prefWidth="222.0" styleClass="txtsubTituloDash" text="Seleccione el tipo de movimiento" />
+      <ChoiceBox fx:id="cbMovimiento" layoutX="33.0" layoutY="118.0" prefHeight="35.0" prefWidth="222.0" styleClass="cbMovimiento" />
+      <Pane layoutX="33.0" layoutY="171.0" prefHeight="123.0" prefWidth="222.0" styleClass="panePresupuesto">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="txtPresupuesto" text="Presupuesto actual" />
+            <Label layoutX="14.0" layoutY="39.0" styleClass="txtBalance" text="Balance" />
+            <Label fx:id="txtPresupuesto" layoutX="14.0" layoutY="62.0" styleClass="txtNumBalance" text="Q 10,000.00" />
+            <Line endX="90.4000244140625" fill="#55595f" layoutX="114.0" layoutY="96.0" startX="-100.0" stroke="#55595f" />
+         </children>
+      </Pane>
+      <VBox layoutX="296.0" layoutY="83.0" prefHeight="70.0" prefWidth="454.0" spacing="10.0">
+         <children>
+            <Label prefHeight="20.0" prefWidth="222.0" styleClass="txtsubTituloDash" text="Datos del movimiento" />
+            <Label alignment="CENTER" prefHeight="20.0" prefWidth="453.0" styleClass="txtGenerico" text="Los apartados marcados con (*) son obligatorios." textAlignment="CENTER" />
+            <Line endX="352.29296875" endY="-1.2427139282226562" fill="#f8f9fa" startX="-100.0" stroke="#f8f9fa" />
+         </children>
+      </VBox>
+      <VBox layoutX="296.0" layoutY="165.0" prefHeight="379.0" prefWidth="433.0" spacing="2.0">
+         <children>
+            <Label styleClass="txtTituloCampo" text="Titulo del movimiento *" />
+            <TextField fx:id="txtTitulo" prefHeight="30.0" prefWidth="434.0" promptText="Título" styleClass="textBoxCampo" />
+            <Label styleClass="txtTituloCampo" text="Cantidad *" />
+            <TextField fx:id="txtCantidad" prefHeight="30.0" prefWidth="434.0" promptText="Cantidad" styleClass="textBoxCampo" />
+            <Label styleClass="txtTituloCampo" text="Fecha *" />
+            <DatePicker fx:id="txtFecha" prefWidth="442.0" promptText="Fecha" styleClass="textBoxCampo" />
+            <HBox prefHeight="55.0" prefWidth="434.0">
                <children>
-                  <Label layoutX="30.0" layoutY="32.0" styleClass="txtTitulo" text="Finanzas Pro" />
-                  <VBox layoutY="62.0" prefHeight="303.0" prefWidth="202.0" spacing="8.0">
+                  <VBox prefHeight="100.0" prefWidth="219.0">
                      <children>
-                        <Button fx:id="btnInicio" graphicTextGap="13.0" mnemonicParsing="false" styleClass="btnMenu" stylesheets="@styleregistro.css" text="Inicio">
-                           <VBox.margin>
-                              <Insets top="25.0" />
-                           </VBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgMenu">
-                                 <image>
-                                    <Image url="@icons/casa.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnRegistrar" graphicTextGap="13.0" mnemonicParsing="false" styleClass="btnMenu" text="Registrar movimiento">
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgMenu">
-                                 <image>
-                                    <Image url="@icons/escritura.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnTransaccion" graphicTextGap="13.0" mnemonicParsing="false" styleClass="btnMenu" text="Transacciones">
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgMenu">
-                                 <image>
-                                    <Image url="@icons/transaccion.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnCuentas" graphicTextGap="13.0" mnemonicParsing="false" styleClass="btnMenu" text="Cuentas">
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgMenu">
-                                 <image>
-                                    <Image url="@icons/cuenta.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnInversion" graphicTextGap="13.0" mnemonicParsing="false" styleClass="btnMenu" text="Inversión">
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgMenu">
-                                 <image>
-                                    <Image url="@icons/crecimiento.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </VBox>
-                  <VBox layoutX="-1.0" layoutY="439.0" prefHeight="111.0" prefWidth="202.0" spacing="8.0">
-                     <children>
-                        <Button fx:id="btnConfiguracion" graphicTextGap="13.0" mnemonicParsing="false" styleClass="btnMenu" text="Configuracion">
-                           <VBox.margin>
-                              <Insets top="25.0" />
-                           </VBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgMenu">
-                                 <image>
-                                    <Image url="@icons/perfil.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnSalir" graphicTextGap="13.0" mnemonicParsing="false" styleClass="btnMenu" text="Salir">
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgMenu">
-                                 <image>
-                                    <Image url="@icons/cerrar.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </VBox>
-               </children>
-            </Pane>
-         </left>
-         <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label layoutX="33.0" layoutY="33.0" styleClass="txtTituloDash" text="Registrar Movimiento" />
-                  <Label layoutX="33.0" layoutY="83.0" prefHeight="20.0" prefWidth="222.0" styleClass="txtsubTituloDash" text="Seleccione el tipo de movimiento" />
-                  <ChoiceBox fx:id="cbMovimiento" layoutX="33.0" layoutY="118.0" prefHeight="30.0" prefWidth="222.0" styleClass="cbMovimiento" />
-                  <Pane layoutX="33.0" layoutY="171.0" prefHeight="123.0" prefWidth="222.0" styleClass="panePresupuesto">
-                     <children>
-                        <Label layoutX="14.0" layoutY="14.0" styleClass="txtPresupuesto" text="Presupuesto actual" />
-                        <Label layoutX="14.0" layoutY="39.0" styleClass="txtBalance" text="Balance" />
-                        <Label fx:id="txtPresupuesto" layoutX="14.0" layoutY="62.0" styleClass="txtNumBalance" text="Q 10,000.00" />
-                        <Line endX="90.4000244140625" fill="#55595f" layoutX="114.0" layoutY="96.0" startX="-100.0" stroke="#55595f" />
-                     </children>
-                  </Pane>
-                  <VBox layoutX="296.0" layoutY="83.0" prefHeight="70.0" prefWidth="454.0" spacing="10.0">
-                     <children>
-                        <Label prefHeight="20.0" prefWidth="222.0" styleClass="txtsubTituloDash" text="Datos del movimiento" />
-                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="453.0" styleClass="txtGenerico" text="Los apartados marcados con (*) son obligatorios." textAlignment="CENTER" />
-                        <Line endX="352.29296875" endY="-1.2427139282226562" fill="#f8f9fa" startX="-100.0" stroke="#f8f9fa" />
+                        <Label styleClass="txtTituloCampo" text="Categoría *" />
+                        <ComboBox fx:id="cbCategoría" prefWidth="205.0" promptText="Categoría" styleClass="textBoxCampo" />
                      </children>
                   </VBox>
-                  <VBox layoutX="296.0" layoutY="165.0" prefHeight="379.0" prefWidth="433.0" spacing="2.0">
+                  <VBox prefHeight="100.0" prefWidth="219.0">
                      <children>
-                        <Label styleClass="txtTituloCampo" text="Titulo del movimiento *" />
-                        <TextField fx:id="txtTitulo" prefHeight="30.0" prefWidth="434.0" promptText="Título" styleClass="textBoxCampo" />
-                        <Label styleClass="txtTituloCampo" text="Cantidad *" />
-                        <TextField fx:id="txtCantidad" prefHeight="30.0" prefWidth="434.0" promptText="Cantidad" styleClass="textBoxCampo" />
-                        <Label styleClass="txtTituloCampo" text="Fecha *" />
-                        <DatePicker fx:id="txtFecha" prefWidth="442.0" promptText="Fecha" styleClass="textBoxCampo" />
-                        <HBox prefHeight="55.0" prefWidth="434.0">
-                           <children>
-                              <VBox prefHeight="100.0" prefWidth="219.0">
-                                 <children>
-                                    <Label styleClass="txtTituloCampo" text="Categoría *" />
-                                    <ComboBox fx:id="cbCategoría" prefWidth="205.0" promptText="Categoría" styleClass="textBoxCampo" />
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="100.0" prefWidth="219.0">
-                                 <children>
-                                    <Label prefHeight="18.0" prefWidth="86.0" styleClass="txtTituloCampo" text="Subcategoría *" />
-                                    <TextField fx:id="txtSubcategoria" prefHeight="30.0" prefWidth="434.0" promptText="Subcategoría" styleClass="textBoxCampo" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="54.0" prefWidth="434.0">
-                           <children>
-                              <CheckBox fx:id="cbRecurrente" mnemonicParsing="false" prefHeight="20.0" prefWidth="219.0" text="Pago Recurrente" />
-                              <VBox prefHeight="100.0" prefWidth="209.0">
-                                 <children>
-                                    <Label prefHeight="18.0" prefWidth="164.0" styleClass="txtTituloCampo" text="¿Cada cuantos días se paga?" />
-                                    <TextField fx:id="txtDias" prefHeight="30.0" prefWidth="434.0" promptText="Número de días" styleClass="textBoxCampo" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <Label styleClass="txtTituloCampo" text="Otros datos" />
-                        <TextField fx:id="txtDescripcion" prefHeight="30.0" prefWidth="223.0" promptText="Descripción" styleClass="textBoxCampo" />
-                        <Button fx:id="btnIngreso" alignment="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="435.0" styleClass="btnIngreso" text="Continuar" textAlignment="RIGHT">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Button>
+                        <Label prefHeight="18.0" prefWidth="86.0" styleClass="txtTituloCampo" text="Subcategoría *" />
+                        <TextField fx:id="txtSubcategoria" prefHeight="30.0" prefWidth="434.0" promptText="Subcategoría" styleClass="textBoxCampo" />
                      </children>
                   </VBox>
                </children>
-            </Pane>
-         </center></BorderPane>
+            </HBox>
+            <HBox prefHeight="54.0" prefWidth="434.0">
+               <children>
+                  <CheckBox fx:id="cbRecurrente" mnemonicParsing="false" prefHeight="20.0" prefWidth="219.0" text="Pago Recurrente" />
+                  <VBox prefHeight="100.0" prefWidth="209.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="164.0" styleClass="txtTituloCampo" text="¿Cada cuantos días se paga?" />
+                        <TextField fx:id="txtDias" prefHeight="30.0" prefWidth="434.0" promptText="Número de días" styleClass="textBoxCampo" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Label styleClass="txtTituloCampo" text="Otros datos" />
+            <TextField fx:id="txtDescripcion" prefHeight="30.0" prefWidth="223.0" promptText="Descripción" styleClass="textBoxCampo" />
+            <Button fx:id="btnIngreso" alignment="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="435.0" styleClass="btnIngreso" text="Continuar" textAlignment="RIGHT">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
    </children>
-</AnchorPane>
+</Pane>
