@@ -7,12 +7,15 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        double prueba = ManejadorEncriptacion.leerPresupuestoDeJSON("DatoPresupuesto.json");
-        if (prueba > 0) {
+        String contenidoPresupuesto = new String(Files.readAllBytes(Paths.get("DatoPresupuesto.json")));
+
+        if (!contenidoPresupuesto.isEmpty()) {
             MostrarFormDashBoard(stage);
         }else {
             MostrarFormLogIn(stage);

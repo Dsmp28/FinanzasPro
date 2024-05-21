@@ -56,6 +56,7 @@ public class ManejadorEncriptacion {
             }
         } catch (IOException e) {
             System.err.println("Error al leer el archivo JSON: " + e.getMessage());
+            throw new RuntimeException();
         } catch (Exception e) {
             return 0.0;
         }
