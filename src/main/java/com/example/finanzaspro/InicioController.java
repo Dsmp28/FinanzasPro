@@ -58,7 +58,8 @@ public class InicioController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard-view.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
-
+            stage.setTitle("FinanzasProDashBoard");
+            stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
