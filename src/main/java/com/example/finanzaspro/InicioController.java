@@ -24,16 +24,13 @@ public class InicioController {
 
         if (correo.isEmpty() || presupuesto.isEmpty()) {
             ManejadorAlertas.showError("Error", "Campos vacíos", "Por favor, llene ambos campos");
-            return;
         }else if (!esCorreoValido(correo)){
             ManejadorAlertas.showError("Error", "Correo inválido", "Por favor, ingrese un correo válido");
-            return;
         }else {
             try {
                 double monto = Double.parseDouble(presupuesto);
                 if (monto <= 0) {
                     ManejadorAlertas.showError("Error", "Presupuesto inválido", "El presupuesto debe ser mayor a 0");
-                    return;
                 }else {
                     ManejadorEncriptacion.guardarPresupuestoEnJSON(monto, "DatoPresupuesto.json");
                     ManejadorEncriptacion.guardarCorreoEnJSON(correo, "DatoCorreo.json");
@@ -60,10 +57,9 @@ public class InicioController {
             stage.setScene(new Scene(loader.load()));
             stage.setTitle("FinanzasProDashBoard");
             stage.show();
-
+            txtCorreo.getScene().getWindow().hide();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }

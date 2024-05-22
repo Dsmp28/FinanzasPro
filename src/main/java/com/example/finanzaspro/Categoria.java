@@ -5,9 +5,16 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 
 public class Categoria {
+    private static int ultimoId = 0;
     private int id;
     private StringProperty titulo;
     private Image imagen;
+
+    public Categoria(String titulo, Image imagen) {
+        this.id = ++ultimoId;
+        this.titulo = new SimpleStringProperty(titulo);
+        this.imagen = imagen;
+    }
 
     public Categoria(int id, String titulo, Image imagen) {
         this.id = id;
@@ -23,20 +30,12 @@ public class Categoria {
         return titulo.get();
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo.set(titulo);
-    }
-
-    public StringProperty tituloProperty() {
-        return titulo;
-    }
-
     public Image getImagen() {
         return imagen;
     }
 
-    public void setImagen(Image imagen) {
-        this.imagen = imagen;
+    public String getDireccionImagen() {
+        return imagen.getUrl();
     }
 }
 

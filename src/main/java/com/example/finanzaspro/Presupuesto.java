@@ -2,24 +2,22 @@ package com.example.finanzaspro;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.StringProperty;
 
 public class Presupuesto {
 
-    private DoubleProperty cantidad;
+    private DoubleProperty monto;
 
-    public Presupuesto(double cantidad) {
-        this.cantidad = new SimpleDoubleProperty(cantidad);
+    public Presupuesto(double monto) {
+        this.monto = new SimpleDoubleProperty(monto);
     }
 
-    public double getCantidad() {
-        return cantidad.get();
+    public void modificarCantidad(double monto) {
+        ManejadorEncriptacion.guardarPresupuestoEnJSON((this.monto.get() + monto), "DatoPresupuesto.json");
+        this.monto.set(this.monto.get() + monto);
     }
 
-    public void modificarCantidad(double cantidad) {
-        this.cantidad.set(this.cantidad.get() + cantidad);
-    }
-
-    public DoubleProperty cantidadProperty() {
-        return cantidad;
+    public DoubleProperty montoProperty() {
+        return monto;
     }
 }

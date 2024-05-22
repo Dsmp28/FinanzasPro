@@ -37,6 +37,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         botonActivo(btnInicio, "dashboard.fxml");
     }
+
     private void botonActivo(Button activo, String fxml){
         reiniciarEstilos();
         activo.setStyle("-fx-text-fill: #000000");
