@@ -20,11 +20,19 @@ public class dashboardC implements Initializable {
     @FXML
     private ListView<Movimiento> lvListaMovimientos;
 
+    @FXML
+    private Label txtIngresado;
+
+    @FXML
+    private Label txtGasto;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CargarPresupuesto();
         CargarMovimientos();
+        CargarIngresado();
+        CargarEgresos();
     }
 
     private void CargarPresupuesto(){
@@ -37,5 +45,17 @@ public class dashboardC implements Initializable {
         ObservableList<Movimiento> movimientos = ManejadorMovimiento.getMovimientos();
         lvListaMovimientos.itemsProperty().bind(Bindings.createObjectBinding(() -> movimientos, movimientos));
         lvListaMovimientos.setCellFactory(listView -> new MovimientoCell());
+    }
+
+    private void CargarIngresado(){
+        Ingreso ingreso = ManejadorIngreso.getInstancia().getIngreso();
+        StringBinding textoIngresado = Bindings.createStringBinding(() -> String.format("Q. %.2f", ingreso.montoProperty().get()), ingreso.montoProperty());
+        txtIngresado.textProperty().bind(textoIngresado);
+    }
+
+    private void CargarEgresos(){
+        Egreso egreso = ManejadorEgresos.getInstancia().getEgreso();
+        StringBinding textoEgresado = Bindings.createStringBinding(() -> String.format("Q. %.2f", egreso.montoProperty().get()), egreso.montoProperty());
+        txtGasto.textProperty().bind(textoEgresado);
     }
 }

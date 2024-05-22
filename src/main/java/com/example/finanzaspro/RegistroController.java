@@ -91,9 +91,12 @@ public class RegistroController implements Initializable {
                 }
 
                 boolean esRecurrente = cbRecurrente.isSelected();
-                int intervaloDias = esRecurrente ? Integer.parseInt(txtDias.getText()) : 0;
-                if (intervaloDias <= 0){
-                    throw new IllegalArgumentException("El intervalo de días debe ser mayor a 0");
+                int intervaloDias = 0;
+                if (esRecurrente){
+                    intervaloDias = Integer.parseInt(txtDias.getText());
+                    if (intervaloDias <= 0){
+                        throw new IllegalArgumentException("El intervalo de días debe ser mayor a 0");
+                    }
                 }
                 LocalDate fecha = dpFecha.getValue();
 

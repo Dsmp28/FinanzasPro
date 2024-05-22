@@ -23,6 +23,11 @@ public class ManejadorMovimiento {
         movimientos.add(nuevoMovimiento);
         guardarMovimientosEnArchivo();
         ControladorPresupuesto.getInstancia().getPresupuesto().modificarCantidad(nuevoMovimiento.getCantidad());
+        if (nuevoMovimiento.getTipo().equals("Ingreso")) {
+            ManejadorIngreso.getInstancia().getIngreso().modificarCantidad(nuevoMovimiento.getCantidad());
+        } else {
+            ManejadorEgresos.getInstancia().getEgreso().modificarCantidad(nuevoMovimiento.getCantidad());
+        }
     }
 
     private static void leerMovimientosDesdeArchivo() {
