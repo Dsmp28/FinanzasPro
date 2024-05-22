@@ -32,7 +32,7 @@
             <Label styleClass="txtTituloCampo" text="Cantidad *" />
             <TextField fx:id="txtCantidad" prefHeight="30.0" prefWidth="434.0" promptText="Cantidad" styleClass="textBoxCampo" />
             <Label styleClass="txtTituloCampo" text="Fecha *" />
-            <DatePicker fx:id="txtFecha" prefWidth="442.0" promptText="Fecha" styleClass="textBoxCampo" />
+            <DatePicker fx:id="dpFecha" prefWidth="442.0" promptText="Fecha" styleClass="textBoxCampo" />
             <HBox prefHeight="55.0" prefWidth="434.0">
                <children>
                   <VBox prefHeight="100.0" prefWidth="219.0">
@@ -62,7 +62,7 @@
             </HBox>
             <Label styleClass="txtTituloCampo" text="Otros datos" />
             <TextField fx:id="txtDescripcion" prefHeight="30.0" prefWidth="223.0" promptText="Descripción" styleClass="textBoxCampo" />
-            <Button fx:id="btnIngreso" alignment="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="435.0" styleClass="btnIngreso" text="Continuar" textAlignment="RIGHT">
+            <Button fx:id="btnIngreso" alignment="CENTER" mnemonicParsing="false" onAction="#AgregarMovimiento" prefHeight="27.0" prefWidth="435.0" styleClass="btnIngreso" text="Continuar" textAlignment="RIGHT">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>

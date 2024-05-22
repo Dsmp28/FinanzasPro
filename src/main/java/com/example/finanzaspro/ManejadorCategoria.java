@@ -18,15 +18,13 @@ public class ManejadorCategoria {
     }
 
     public static void agregarCategoria(String titulo) {
-        Categoria nuevaCategoria = new Categoria(titulo, new Image(ManejadorCategoria.class.getResource("icons/ImagenPrueba.png").toExternalForm()));
-
-        if (titulo.equals("Otra")) {
-            categorias.add(nuevaCategoria);
-        } else {
-            categorias.add(categorias.size() - 1, nuevaCategoria); // Agregar antes de la última posición (que será "Otra")
+        if (buscarCategoriaPorTitulo(titulo) == null && !titulo.equals("Otra") && !titulo.isEmpty()) {
+            Categoria nuevaCategoria = new Categoria(titulo, new Image(ManejadorCategoria.class.getResource("icons/ImagenPrueba.png").toExternalForm()));
+            categorias.add(categorias.size() - 1, nuevaCategoria);
+            guardarCategoriasEnArchivo();
+        }else{
+            throw new IllegalArgumentException("La categoria ya existe o no se puede agregar");
         }
-
-        guardarCategoriasEnArchivo();
     }
 
     private static void leerCategoriasDesdeArchivo() {
@@ -36,5 +34,14 @@ public class ManejadorCategoria {
 
     private static void guardarCategoriasEnArchivo() {
         ManejadorEncriptacion.guardarCategoriasEnJSON(categorias, "DatosCategorias.json");
+    }
+
+    public static Categoria buscarCategoriaPorTitulo(String titulo) {
+        for (Categoria categoria : categorias) {
+            if (categoria.getTitulo().equals(titulo)) {
+                return categoria;
+            }
+        }
+        return null;
     }
 }

@@ -77,7 +77,8 @@ public class ManejadorEncriptacion {
             List<Map<String, String>> datosEncriptados = new ArrayList<>();
             for (Movimiento movimiento : movimientos) {
                 Map<String, String> movimientoEncriptado = new HashMap<>();
-                movimientoEncriptado.put("categoria_id", Integer.toString(movimiento.getCategoria().getId()));
+                movimientoEncriptado.put("categoria_id", EncryptionUtil.encrypt(Integer.toString(movimiento.getCategoria().getId())));
+                movimientoEncriptado.put("tipo", EncryptionUtil.encrypt(movimiento.getTipo()));
                 movimientoEncriptado.put("titulo", EncryptionUtil.encrypt(movimiento.getTitulo()));
                 movimientoEncriptado.put("cantidad", EncryptionUtil.encrypt(Double.toString(movimiento.getCantidad())));
                 movimientoEncriptado.put("fecha", EncryptionUtil.encrypt(movimiento.getFecha().toString()));
@@ -98,33 +99,38 @@ public class ManejadorEncriptacion {
         }
     }
 
-    public static List<Movimiento> leerMovimientosDeJSON(String archivoJSON, List<Categoria> categorias) {
+    public static ObservableList<Movimiento> leerMovimientosDeJSON(String archivoJSON, List<Categoria> categorias) {
         File file = new File(archivoJSON);
         if (!file.exists()) {
             System.err.println("El archivo JSON no existe: " + archivoJSON);
-            return new ArrayList<>();
+            return FXCollections.observableArrayList();
         }
 
-        List<Movimiento> movimientos = new ArrayList<>();
+        ObservableList<Movimiento> movimientos = FXCollections.observableArrayList();
         try {
             Gson gson = new Gson();
             Type tipoListaMovimientos = new TypeToken<List<Map<String, String>>>() {}.getType();
             try (FileReader reader = new FileReader(file)) {
                 List<Map<String, String>> datosEncriptados = gson.fromJson(reader, tipoListaMovimientos);
 
-                for (Map<String, String> datos : datosEncriptados) {
-                    int categoriaId = Integer.parseInt(datos.get("categoria_id"));
-                    Categoria categoria = categorias.stream().filter(c -> c.getId() == categoriaId).findFirst().orElse(null);
+                if (datosEncriptados == null) {
+                    return movimientos;
+                }else {
+                    for (Map<String, String> datos : datosEncriptados) {
+                        int categoriaId = Integer.parseInt(EncryptionUtil.decrypt(datos.get("categoria_id")));
+                        Categoria categoria = categorias.stream().filter(c -> c.getId() == categoriaId).findFirst().orElse(null);
 
-                    if (categoria != null) {
-                        String titulo = EncryptionUtil.decrypt(datos.get("titulo"));
-                        double cantidad = Double.parseDouble(EncryptionUtil.decrypt(datos.get("cantidad")));
-                        LocalDate fecha = LocalDate.parse(EncryptionUtil.decrypt(datos.get("fecha")));
-                        boolean esRecurrente = Boolean.parseBoolean(EncryptionUtil.decrypt(datos.get("esRecurrente")));
-                        int intervaloDias = esRecurrente ? Integer.parseInt(EncryptionUtil.decrypt(datos.get("intervaloDias"))) : 0;
+                        if (categoria != null) {
+                            String tipo = EncryptionUtil.decrypt(datos.get("tipo"));
+                            String titulo = EncryptionUtil.decrypt(datos.get("titulo"));
+                            double cantidad = Double.parseDouble(EncryptionUtil.decrypt(datos.get("cantidad")));
+                            LocalDate fecha = LocalDate.parse(EncryptionUtil.decrypt(datos.get("fecha")));
+                            boolean esRecurrente = Boolean.parseBoolean(EncryptionUtil.decrypt(datos.get("esRecurrente")));
+                            int intervaloDias = esRecurrente ? Integer.parseInt(EncryptionUtil.decrypt(datos.get("intervaloDias"))) : 0;
 
-                        Movimiento movimiento = new Movimiento(categoria, titulo, cantidad, fecha, esRecurrente, intervaloDias);
-                        movimientos.add(movimiento);
+                            Movimiento movimiento = new Movimiento(categoria, tipo, titulo, cantidad, fecha, esRecurrente, intervaloDias);
+                            movimientos.add(movimiento);
+                        }
                     }
                 }
             }
