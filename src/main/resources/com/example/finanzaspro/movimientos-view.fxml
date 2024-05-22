@@ -9,10 +9,10 @@
       <ListView fx:id="lvMovimientos" layoutX="360.0" layoutY="70.0" prefHeight="452.0" prefWidth="341.0" styleClass="menuPrincipal" />
       <Label layoutX="360.0" layoutY="33.0" styleClass="txtTitulo" text="Transacciones" />
       <Button fx:id="btnRegistrar" layoutX="33.0" layoutY="33.0" mnemonicParsing="false" onAction="#btnRegistro" prefHeight="25.0" prefWidth="287.0" styleClass="btnIngreso" text="Registrar movimiento" />
-      <TextField layoutX="32.0" layoutY="117.0" prefHeight="25.0" prefWidth="255.0" promptText="Buscar" styleClass="textBoxCampo" />
-      <Button layoutX="287.0" layoutY="117.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="34.0" styleClass="btnIngreso">
+      <TextField fx:id="txtTituloBusqueda" layoutX="32.0" layoutY="117.0" prefHeight="25.0" prefWidth="255.0" promptText="Buscar" styleClass="textBoxCampo" />
+      <Button fx:id="btnBusqueda" layoutX="287.0" layoutY="117.0" mnemonicParsing="false" onAction="#BuscarMovimientos" prefHeight="30.0" prefWidth="34.0" styleClass="btnIngreso">
          <graphic>
-            <ImageView fx:id="btnBusqueda" fitHeight="30.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="btnIngreso">
+            <ImageView fitHeight="30.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="btnIngreso">
                <image>
                   <Image url="@icons/lupa.png" />
                </image>
