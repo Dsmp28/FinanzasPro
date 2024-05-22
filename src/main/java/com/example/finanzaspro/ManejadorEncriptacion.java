@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.FileReader;
@@ -174,5 +177,64 @@ public class ManejadorEncriptacion {
             System.err.println("Error al desencriptar el correo: " + e.getMessage());
         }
         return correo;
+    }
+
+    public static void guardarCategoriasEnJSON(List<Categoria> categorias, String archivoJSON) {
+        File file = new File(archivoJSON);
+        if (!file.exists()) {
+            System.err.println("El archivo JSON no existe: " + archivoJSON);
+            return;
+        }
+
+        try {
+            List<Map<String, String>> datosEncriptados = new ArrayList<>();
+            for (Categoria categoria : categorias) {
+                Map<String, String> categoriaEncriptada = new HashMap<>();
+                categoriaEncriptada.put("id", EncryptionUtil.encrypt(Integer.toString(categoria.getId())));
+                categoriaEncriptada.put("titulo", EncryptionUtil.encrypt(categoria.getTitulo()));
+                categoriaEncriptada.put("imagen", EncryptionUtil.encrypt(categoria.getDireccionImagen()));
+                datosEncriptados.add(categoriaEncriptada);
+            }
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            try (FileWriter writer = new FileWriter(file, false)) { // `false` para no agregar sino sobreescribir
+                gson.toJson(datosEncriptados, writer);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ObservableList<Categoria> leerCategoriasDeJSON(String archivoJSON) {
+        File file = new File(archivoJSON);
+        if (!file.exists()) {
+            System.err.println("El archivo JSON no existe: " + archivoJSON);
+            return FXCollections.observableArrayList();
+        }
+
+        ObservableList<Categoria> categorias = FXCollections.observableArrayList();
+        try {
+            Gson gson = new Gson();
+            Type tipoListaCategoria = new TypeToken<List<Map<String, String>>>() {}.getType();
+            try (FileReader reader = new FileReader(file)) {
+                List<Map<String, String>> datosEncriptados = gson.fromJson(reader, tipoListaCategoria);
+
+                for (Map<String, String> datos : datosEncriptados) {
+                    int id = Integer.parseInt(EncryptionUtil.decrypt(datos.get("id")));
+                    String titulo = EncryptionUtil.decrypt(datos.get("titulo"));
+                    String imagenURL = EncryptionUtil.decrypt(datos.get("imagen")).replaceAll(".*(icons/.*)", "$1");
+
+                    Image imagen = new Image(ManejadorCategoria.class.getResource(imagenURL).toExternalForm());
+                    Categoria categoria = new Categoria(id, titulo, imagen);
+
+                    categorias.add(categoria);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo JSON: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return categorias;
     }
 }
