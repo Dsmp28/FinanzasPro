@@ -42,7 +42,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="btnTransaccion" graphicTextGap="13.0" mnemonicParsing="false" styleClass="btnMenu" text="Transacciones">
+                        <Button fx:id="btnTransaccion" graphicTextGap="13.0" mnemonicParsing="false" onAction="#btnTransaccion" styleClass="btnMenu" text="Transacciones">
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgMenu">
                                  <image>

@@ -4,10 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,7 +50,12 @@ public class DashboardController implements Initializable {
     }
     private void cargarFxml(String fxml){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            Parent root = loader.load();
+            if(loader.getController() instanceof paneController){
+                paneController controller = loader.getController();
+                controller.setDashboardController(this);
+            }
             contentArea.getChildren().clear();
             contentArea.getChildren().add(root);
         } catch (IOException e) {
@@ -68,6 +71,18 @@ public class DashboardController implements Initializable {
         btnRegistrar.setOnAction(event -> {
             botonActivo(btnRegistrar, "registro-view.fxml");
         });
+    }
+    public void btnTransaccion() {
+        btnTransaccion.setOnAction(event -> {
+            botonActivo(btnTransaccion, "movimientos-view.fxml");
+        });
+    }
+    public void cambiarVista(String fxml, Button activo){
+        botonActivo(activo, fxml);
+    }
+
+    public Button getBtnRegistrar(){
+        return btnRegistrar;
     }
 }
 
