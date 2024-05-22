@@ -1,12 +1,16 @@
 package com.example.finanzaspro;
 
+import javafx.collections.ObservableList;
+
 public class ControladorPresupuesto {
     private static ControladorPresupuesto instancia;
     private Presupuesto presupuesto;
 
     private ControladorPresupuesto() {
-        double cantidad = ManejadorEncriptacion.leerPresupuestoDeJSON("DatoPresupuesto.json");
-        presupuesto = new Presupuesto(cantidad);
+        ObservableList<Categoria> categorias = ManejadorCategoria.getCategorias();
+        ObservableList<Movimiento> movimientos = ManejadorEncriptacion.leerMovimientosDeJSON("DatosMovimientos.json", categorias);
+        double presupuestoOriginal = ManejadorEncriptacion.leerPresupuestoDeJSON("PresupuestoOriginal.json");
+        presupuesto = new Presupuesto(presupuestoOriginal + calcularMontoTotal(movimientos));
     }
 
     public static synchronized ControladorPresupuesto getInstancia() {
@@ -18,5 +22,12 @@ public class ControladorPresupuesto {
 
     public Presupuesto getPresupuesto() {
         return presupuesto;
+    }
+
+    private static double calcularMontoTotal(ObservableList<Movimiento> movimientos) {
+        double montoTotal = 0.0;
+        montoTotal += ManejadorEncriptacion.leerPresupuestoDeJSON("DatoIngresos.json");
+        montoTotal += ManejadorEncriptacion.leerPresupuestoDeJSON("DatoEgresos.json");
+        return montoTotal;
     }
 }

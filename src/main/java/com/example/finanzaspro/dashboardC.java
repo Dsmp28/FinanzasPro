@@ -29,10 +29,10 @@ public class dashboardC implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CargarPresupuesto();
         CargarMovimientos();
         CargarIngresado();
         CargarEgresos();
+        CargarPresupuesto();
     }
 
     private void CargarPresupuesto(){
