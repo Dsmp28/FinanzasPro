@@ -85,7 +85,7 @@
                      </cursor></Button>
                </children>
             </HBox>
-            <VBox layoutX="14.0" layoutY="64.0" prefHeight="254.0" prefWidth="235.0" />
+            <ListView fx:id="lvListaMovimientos" layoutX="3.0" layoutY="74.0" prefHeight="254.0" prefWidth="258.0" />
          </children>
       </Pane>
    </children>
