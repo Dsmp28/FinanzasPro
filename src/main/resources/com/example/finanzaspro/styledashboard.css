@@ -1,4 +1,4 @@
-.menuLateral{
+.menuLateral {
     -fx-background-color: #f8f9fa;
 }
 .menuPrincipal{
@@ -105,4 +105,11 @@
     -fx-font-family: "Roboto";
     -fx-font-weight: 700;
 }
-.alert
+
+.alert {
+    -fx-background-color: #f44336; /* Red */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}

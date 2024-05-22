@@ -71,15 +71,15 @@
                </cursor></Button>
             <HBox layoutX="6.0" layoutY="42.0" prefHeight="22.0" prefWidth="152.0">
                <children>
-                  <Button fx:id="btnTodos" mnemonicParsing="false" prefHeight="22.0" prefWidth="46.0" styleClass="btnVerTodos" text="Todos" textAlignment="RIGHT">
+                  <Button fx:id="btnTodos" mnemonicParsing="false" onAction="#MostrarTodosMovimientos" prefHeight="22.0" prefWidth="46.0" styleClass="btnVerTodos" text="Todos" textAlignment="RIGHT">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button fx:id="btnGastos" mnemonicParsing="false" prefHeight="22.0" prefWidth="47.0" styleClass="btnVerTodos" text="Gastos" textAlignment="RIGHT">
+                  <Button fx:id="btnGastos" mnemonicParsing="false" onAction="#MostrarGastos" prefHeight="22.0" prefWidth="47.0" styleClass="btnVerTodos" text="Gastos" textAlignment="RIGHT">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button fx:id="btnIngresos" mnemonicParsing="false" prefHeight="22.0" prefWidth="52.0" styleClass="btnVerTodos" text="Ingresos" textAlignment="RIGHT">
+                  <Button fx:id="btnIngresos" mnemonicParsing="false" onAction="#MostrarIngresos" prefHeight="22.0" prefWidth="62.0" styleClass="btnVerTodos" text="Ingresos" textAlignment="RIGHT">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
