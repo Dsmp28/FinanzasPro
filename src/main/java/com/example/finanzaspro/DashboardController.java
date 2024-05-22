@@ -4,11 +4,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -23,7 +27,7 @@ public class DashboardController implements Initializable {
         private Button btnTransaccion;
 
         @FXML
-        private Button btnCuentas;
+        private Button btnSalir;
 
         @FXML
         private Button btnInversion;
@@ -45,7 +49,6 @@ public class DashboardController implements Initializable {
         btnInicio.setStyle("-fx-text-fill: #55595f");
         btnRegistrar.setStyle("-fx-text-fill: #55595f");
         btnTransaccion.setStyle("-fx-text-fill: #55595f");
-        btnCuentas.setStyle("-fx-text-fill: #55595f");
         btnInversion.setStyle("-fx-text-fill: #55595f");
     }
     private void cargarFxml(String fxml){
@@ -76,6 +79,21 @@ public class DashboardController implements Initializable {
         btnTransaccion.setOnAction(event -> {
             botonActivo(btnTransaccion, "movimientos-view.fxml");
         });
+    }
+    public void btnSalir(){
+        btnSalir.setOnAction(event -> {
+            salir();
+        });
+    }
+    private void salir(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Salir");
+        alert.setHeaderText("¿Estás seguro de que deseas salir?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            Stage stage = (Stage) btnSalir.getScene().getWindow();
+            stage.close();
+        }
     }
     public void cambiarVista(String fxml, Button activo){
         botonActivo(activo, fxml);

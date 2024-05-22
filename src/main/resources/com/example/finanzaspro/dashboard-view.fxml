@@ -54,18 +54,6 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="btnCuentas" graphicTextGap="13.0" mnemonicParsing="false" styleClass="btnMenu" text="Cuentas">
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgMenu">
-                                 <image>
-                                    <Image url="@icons/cuenta.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
                         <Button fx:id="btnInversion" graphicTextGap="13.0" mnemonicParsing="false" styleClass="btnMenu" text="Inversión">
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgMenu">
@@ -99,7 +87,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="btnSalir" graphicTextGap="13.0" mnemonicParsing="false" styleClass="btnMenu" text="Salir">
+                        <Button fx:id="btnSalir" graphicTextGap="13.0" mnemonicParsing="false" onAction="#btnSalir" styleClass="btnMenu" text="Salir">
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgMenu">
                                  <image>
