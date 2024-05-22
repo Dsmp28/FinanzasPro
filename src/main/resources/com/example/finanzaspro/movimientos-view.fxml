@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" styleClass="menuPrincipal" stylesheets="@stylemovimientos.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finanzaspro.MovimientosController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" styleClass="menuPrincipal" stylesheets="@stylemovimientos.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finanzaspro.MovimientosController">
    <children>
       <ListView fx:id="lvMovimientos" layoutX="360.0" layoutY="70.0" prefHeight="452.0" prefWidth="341.0" styleClass="menuPrincipal" />
       <Label layoutX="360.0" layoutY="33.0" styleClass="txtTitulo" text="Transacciones" />
@@ -25,7 +20,7 @@
          </graphic>
       </Button>
       <Label layoutX="33.0" layoutY="149.0" styleClass="txtTituloCat" text="Categorías" />
-      <ListView fx:id="lvCategorías" layoutX="33.0" layoutY="174.0" prefHeight="232.0" prefWidth="165.0" styleClass="menuPrincipal" />
+      <ListView fx:id="lvCategorias" layoutX="33.0" layoutY="174.0" prefHeight="232.0" prefWidth="188.0" styleClass="menuPrincipal" />
       <Label layoutX="33.0" layoutY="413.0" styleClass="txtTituloCat" text="Tipo de Movimiento" />
       <ComboBox fx:id="cbMovimiento" layoutX="33.0" layoutY="444.0" prefHeight="27.0" prefWidth="165.0" styleClass="cbMovimiento" />
       <Label layoutX="33.0" layoutY="70.0" styleClass="txtTituloCat" text="Buscar por título" />

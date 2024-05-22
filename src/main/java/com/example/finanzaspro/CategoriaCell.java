@@ -32,5 +32,12 @@ public class CategoriaCell extends ListCell<Categoria> {
             setGraphic(null);
         }
     }
+
+    private void removeImageView() {
+        if (imageView != null) {
+            getChildren().remove(imageView);
+            imageView = null;
+        }
+    }
 }
 
