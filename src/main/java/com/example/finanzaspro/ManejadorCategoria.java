@@ -38,7 +38,7 @@ public class ManejadorCategoria {
 
     public static Categoria buscarCategoriaPorTitulo(String titulo) {
         for (Categoria categoria : categorias) {
-            if (categoria.getTitulo().equals(titulo)) {
+            if (categoria.getTitulo().toLowerCase().equals(titulo.toLowerCase())) {
                 return categoria;
             }
         }

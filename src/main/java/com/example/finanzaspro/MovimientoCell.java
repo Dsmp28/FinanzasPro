@@ -1,5 +1,6 @@
 package com.example.finanzaspro;
 
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -26,6 +27,8 @@ public class MovimientoCell extends ListCell<Movimiento> {
         cantidad = new Text();
 
         fecha = new Text();
+        fecha.setStyle("-fx-fill: '#55595f'; -fx-font-size: 10px");
+
 
         VBox vBox = new VBox(cantidad, fecha);
         vBox.setSpacing(5);
@@ -47,9 +50,9 @@ public class MovimientoCell extends ListCell<Movimiento> {
             cantidad.setText(String.format("Q. %.2f", item.getCantidad()));
 
             if (item.getCantidad() < 0) {
-                cantidad.setStyle("-fx-fill: red");
+                cantidad.setStyle("-fx-fill: 'red'; -fx-font-weight: bold; -fx-font-size: 14px");
             } else {
-                cantidad.setStyle("-fx-fill: green");
+                cantidad.setStyle("-fx-fill: 'green'; -fx-font-weight: bold; -fx-font-size:14px");
             }
             fecha.setText(item.getFecha().toString());
             setGraphic(content);

@@ -45,6 +45,7 @@ public class dashboardC implements Initializable {
         ObservableList<Movimiento> movimientos = ManejadorMovimiento.getMovimientos();
         lvListaMovimientos.itemsProperty().bind(Bindings.createObjectBinding(() -> movimientos, movimientos));
         lvListaMovimientos.setCellFactory(listView -> new MovimientoCell());
+        lvListaMovimientos.setFocusTraversable(false);
     }
 
     private void CargarIngresado(){
