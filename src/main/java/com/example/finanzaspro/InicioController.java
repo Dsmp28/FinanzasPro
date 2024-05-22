@@ -33,6 +33,7 @@ public class InicioController {
                     ManejadorAlertas.showError("Error", "Presupuesto inválido", "El presupuesto debe ser mayor a 0");
                 }else {
                     ManejadorEncriptacion.guardarPresupuestoEnJSON(monto, "DatoPresupuesto.json");
+                    ManejadorEncriptacion.guardarPresupuestoEnJSON(monto, "PresupuestoOriginal.json");
                     ManejadorEncriptacion.guardarCorreoEnJSON(correo, "DatoCorreo.json");
                     ManejadorAlertas.showInformation("Éxito", "Presupuesto guardado", "El presupuesto se ha guardado correctamente");
                     abrirDashboard();
