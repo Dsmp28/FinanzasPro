@@ -17,6 +17,11 @@ public class Presupuesto {
         this.monto.set(this.monto.get() + monto);
     }
 
+    public void setMonto(double monto) {
+        ManejadorEncriptacion.guardarPresupuestoEnJSON(monto, "DatoPresupuesto.json");
+        this.monto.set(monto);
+    }
+
     public DoubleProperty montoProperty() {
         return monto;
     }

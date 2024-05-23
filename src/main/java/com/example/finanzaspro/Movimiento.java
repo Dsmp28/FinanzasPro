@@ -49,5 +49,32 @@ public class Movimiento {
         return tipo;
     }
 
+    public void setCategoria(Categoria categoriaSeleccionada) {
+        this.categoria = categoriaSeleccionada;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setCantidad(double cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void setEsRecurrente(boolean esRecurrente) {
+        this.esRecurrente = esRecurrente;
+    }
+
+    public void setIntervaloDias(int intervaloDias) {
+        this.intervaloDias = intervaloDias;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
 }
 

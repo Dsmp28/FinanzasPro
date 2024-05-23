@@ -14,6 +14,12 @@ public class ManejadorIngreso {
         ManejadorEncriptacion.guardarPresupuestoEnJSON(cantidad, "DatoIngresos.json");
     }
 
+    public void actualizarIngresos() {
+        ObservableList<Movimiento> movimientos = ManejadorEncriptacion.leerMovimientosDeJSON("DatosMovimientos.json", ManejadorCategoria.getCategorias());
+        double cantidad = calcularMontoTotalIngresos(movimientos);
+        ingreso.setMonto(cantidad);
+    }
+
     public static synchronized ManejadorIngreso getInstancia() {
         if (instancia == null) {
             instancia = new ManejadorIngreso();

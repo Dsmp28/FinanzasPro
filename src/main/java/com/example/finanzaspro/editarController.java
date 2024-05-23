@@ -56,11 +56,12 @@ public class editarController {
         this.movimiento = movimiento;
         llenarCampos();
     }
+
     private void llenarCampos(){
         CargarComboBoxCategoria();
         CargarComboBoxTipoMovimiento();
         txtTitulo.setText(movimiento.getTitulo());
-        txtCantidad.setText(String.valueOf(movimiento.getCantidad()));
+        txtCantidad.setText(String.valueOf(movimiento.getCantidad() < 0 ? movimiento.getCantidad() * -1 : movimiento.getCantidad()));
         dpFecha.setValue(movimiento.getFecha());
         cbRecurrente.setSelected(movimiento.isEsRecurrente());
         if(cbRecurrente.isSelected()){
@@ -79,6 +80,7 @@ public class editarController {
         txtDias.setVisible(cbRecurrente.isSelected());
         labelDias.setVisible(cbRecurrente.isSelected());
     }
+
     @FXML
     private void guardarMovimiento(){
         if (ValidarDatosObligatorios()){
@@ -93,6 +95,7 @@ public class editarController {
                 String titulo = txtTitulo.getText();
 
                 double cantidad = Double.parseDouble(txtCantidad.getText());
+
                 if (tipo.equals("Egreso")){
                     cantidad = cantidad * -1;
                 }
@@ -107,7 +110,20 @@ public class editarController {
                 }
                 LocalDate fecha = dpFecha.getValue();
 
-                //Insertar para editar el movimiento actual
+                // Actualizar el movimiento actual
+                movimiento.setCategoria(categoriaSeleccionada);
+                movimiento.setTipo(tipo);
+                movimiento.setTitulo(titulo);
+                movimiento.setCantidad(cantidad);
+                movimiento.setEsRecurrente(esRecurrente);
+                movimiento.setIntervaloDias(intervaloDias);
+                movimiento.setFecha(fecha);
+
+                ManejadorEncriptacion.guardarMovimientosEnJSON(ManejadorMovimiento.getMovimientos(), "DatosMovimientos.json");
+                ManejadorIngreso.getInstancia().actualizarIngresos();
+                ManejadorEgresos.getInstancia().actualizarEgresos();
+                ControladorPresupuesto.getInstancia().actualizarPresupuesto();
+
                 ManejadorAlertas.showInformation("Movimiento editado", "Movimiento editado exitosamente", "El movimiento ha sido editado exitosamente");
                 stage.close();
             }catch (Exception e){
@@ -115,6 +131,7 @@ public class editarController {
             }
         }
     }
+
     @FXML
     public void AgregarSeccionNuevaCategoria(){
         Categoria categoriaSeleccionada = cbCategoria.getSelectionModel().getSelectedItem();
@@ -128,6 +145,7 @@ public class editarController {
             txtSubcategoria.setVisible(false);
         }
     }
+
     private boolean ValidarDatosObligatorios(){
         if (txtTitulo.getText().isEmpty() || txtCantidad.getText().isEmpty() || dpFecha.getValue() == null || cbCategoria.getSelectionModel().getSelectedItem() == null){
             ManejadorAlertas.showError("Error", "Faltan datos obligatorios", "Por favor, llene todos los campos obligatorios");
@@ -145,6 +163,7 @@ public class editarController {
         }
         return true;
     }
+
     @FXML
     private void cerrar(){
         stage.close();
@@ -153,7 +172,7 @@ public class editarController {
     private void CargarComboBoxTipoMovimiento(){
         cbMovimiento.getItems().add("Ingreso");
         cbMovimiento.getItems().add("Egreso");
-        cbMovimiento.setValue("Ingreso");
+        cbMovimiento.setValue(movimiento.getTipo());
         cbMovimiento.setStyle("-fx-text-fill: white");
     }
     private void CargarComboBoxCategoria(){

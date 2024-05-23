@@ -13,6 +13,13 @@ public class ControladorPresupuesto {
         presupuesto = new Presupuesto(presupuestoOriginal + calcularMontoTotal(movimientos));
     }
 
+    public void actualizarPresupuesto() {
+        ObservableList<Movimiento> movimientos = ManejadorEncriptacion.leerMovimientosDeJSON("DatosMovimientos.json", ManejadorCategoria.getCategorias());
+        double cantidad = calcularMontoTotal(movimientos);
+        double presupuestoOriginal = ManejadorEncriptacion.leerPresupuestoDeJSON("PresupuestoOriginal.json");
+        presupuesto.setMonto(presupuestoOriginal + cantidad);
+    }
+
     public static synchronized ControladorPresupuesto getInstancia() {
         if (instancia == null) {
             instancia = new ControladorPresupuesto();
