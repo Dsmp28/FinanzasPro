@@ -4,15 +4,22 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class MovimientosController implements Initializable, paneController{
 
@@ -27,9 +34,6 @@ public class MovimientosController implements Initializable, paneController{
     private ListView lvCategorias;
 
     @FXML
-    private Button btnBusqueda;
-
-    @FXML
     private ListView lvMovimientos;
 
     @FXML
@@ -41,7 +45,10 @@ public class MovimientosController implements Initializable, paneController{
         cargarComboBox();
         CargarCategorias();
         CargarMovimientos();
+
+        lvMovimientos.setOnMouseClicked(this::listViewDoubleClick);
     }
+
     public void btnRegistro(){
         btnRegistrar.setOnAction(event -> {
             if(dashboardController != null){
@@ -88,5 +95,35 @@ public class MovimientosController implements Initializable, paneController{
         ObservableList<Movimiento> movimientos = ManejadorMovimiento.getMovimientos();
         lvMovimientos.itemsProperty().bind(Bindings.createObjectBinding(() -> movimientos, movimientos));
         lvMovimientos.setCellFactory(listView -> new MovimientoCell());
+    }
+
+    private void listViewDoubleClick(MouseEvent event){
+        if(event.getClickCount() == 2){
+            Movimiento movimiento = (Movimiento) lvMovimientos.getSelectionModel().getSelectedItem();
+            if(movimiento != null){
+                abrirEdicion(movimiento);
+            }
+        }
+    }
+    private void abrirEdicion(Movimiento movimiento){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("editar-view.fxml"));
+            Parent root = loader.load();
+            Stage emergente = new Stage();
+
+            emergente.initModality(Modality.APPLICATION_MODAL);
+            emergente.setTitle("Editar movimiento");
+            emergente.setScene(new Scene(root));
+            editarController controller = loader.getController();
+            controller.setStage(emergente);
+            controller.setMovimiento(movimiento);
+            emergente.showAndWait();
+
+            CargarCategorias();
+            CargarMovimientos();
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

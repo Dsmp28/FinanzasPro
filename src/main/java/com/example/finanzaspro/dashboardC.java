@@ -135,6 +135,12 @@ public class dashboardC implements Initializable {
             controller.setStage(emergente);
             controller.setMovimiento(movimiento);
             emergente.showAndWait();
+
+            MostrarTodosMovimientos();
+            CargarIngresado();
+            CargarEgresos();
+            CargarPresupuesto();
+
         }catch (IOException e){
             e.printStackTrace();
         }

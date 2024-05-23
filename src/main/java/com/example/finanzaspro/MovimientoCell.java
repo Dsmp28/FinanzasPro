@@ -11,8 +11,8 @@ public class MovimientoCell extends ListCell<Movimiento> {
     private HBox content;
     private ImageView imageView;
     private Text titulo;
+    private Text categoria;
     private Text cantidad;
-
     private Text fecha;
 
     public MovimientoCell() {
@@ -24,17 +24,21 @@ public class MovimientoCell extends ListCell<Movimiento> {
         titulo = new Text();
         titulo.setStyle("-fx-font-weight: bold");
 
+        categoria = new Text();
+
         cantidad = new Text();
 
         fecha = new Text();
         fecha.setStyle("-fx-fill: '#55595f'; -fx-font-size: 10px");
 
-
         VBox vBox = new VBox(cantidad, fecha);
         vBox.setSpacing(5);
         vBox.alignmentProperty().setValue(javafx.geometry.Pos.CENTER_RIGHT);
 
-        content = new HBox(imageView, titulo, vBox);
+        VBox vBoxTituloCategoria = new VBox(titulo, categoria);
+        vBoxTituloCategoria.setSpacing(5);
+
+        content = new HBox(imageView, vBoxTituloCategoria, vBox);
         content.setHgrow(vBox, javafx.scene.layout.Priority.ALWAYS);
         content.setSpacing(10); // Espacio entre la imagen y el texto
         content.setPadding(new javafx.geometry.Insets(5));
@@ -47,6 +51,7 @@ public class MovimientoCell extends ListCell<Movimiento> {
         if (item != null && !empty) {
             imageView.setImage(item.getCategoria().getImagen());
             titulo.setText(item.getTitulo());
+            categoria.setText(item.getCategoria().getTitulo());
             cantidad.setText(String.format("Q. %.2f", item.getCantidad()));
 
             if (item.getCantidad() < 0) {
@@ -60,5 +65,4 @@ public class MovimientoCell extends ListCell<Movimiento> {
             setGraphic(null);
         }
     }
-
 }
