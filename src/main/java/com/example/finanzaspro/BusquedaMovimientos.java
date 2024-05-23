@@ -16,11 +16,30 @@ public class BusquedaMovimientos {
         this.titulo = titulo;
     }
 
+    public BusquedaMovimientos() {
+        this.movimientos = ManejadorMovimiento.getMovimientos();
+        this.categoriaElegida = null;
+        this.tipo = "";
+        this.titulo = "";
+    }
+
     public ObservableList<Movimiento> BuscarMovimientos(){
         ObservableList<Movimiento> movimientosFiltrados = FXCollections.observableArrayList();
 
         for (Movimiento movimiento : movimientos) {
             if (filtrarPorTipo(movimiento) && filtrarPorCategoria(movimiento) && filtrarPorTitulo(movimiento)) {
+                movimientosFiltrados.add(movimiento);
+            }
+        }
+
+        return movimientosFiltrados;
+    }
+
+    public ObservableList<Movimiento> BuscarMovimientos(String tipo){
+        ObservableList<Movimiento> movimientosFiltrados = FXCollections.observableArrayList();
+        this.tipo = tipo;
+        for (Movimiento movimiento : movimientos) {
+            if (filtrarPorTipo(movimiento)) {
                 movimientosFiltrados.add(movimiento);
             }
         }

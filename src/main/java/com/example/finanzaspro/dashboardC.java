@@ -57,22 +57,30 @@ public class dashboardC implements Initializable {
     public void MostrarTodosMovimientos(){
         botonActivo(btnTodos);
         ObservableList<Movimiento> movimientos = ManejadorMovimiento.getMovimientos();
-        lvListaMovimientos.itemsProperty().bind(Bindings.createObjectBinding(() -> movimientos, movimientos));
-        lvListaMovimientos.setCellFactory(listView -> new MovimientoCell());
+        AsignarListaMovimientos(movimientos);
     }
 
     @FXML
     public void MostrarGastos(){
         botonActivo(btnGastos);
-        ObservableList<Movimiento> movimientos = ManejadorMovimiento.getMovimientos();
-        lvListaMovimientos.itemsProperty().bind(Bindings.createObjectBinding(() -> movimientos, movimientos));
-        lvListaMovimientos.setCellFactory(listView -> new MovimientoCell());
+        BusquedaMovimientos BusquedaMovimientos = new BusquedaMovimientos();
+
+        ObservableList<Movimiento> movimientosEncontrados = BusquedaMovimientos.BuscarMovimientos("Egreso");
+
+        AsignarListaMovimientos(movimientosEncontrados);
     }
 
     @FXML
     public void MostrarIngresos(){
         botonActivo(btnIngresos);
-        ObservableList<Movimiento> movimientos = ManejadorMovimiento.getMovimientos();
+        BusquedaMovimientos BusquedaMovimientos = new BusquedaMovimientos();
+
+        ObservableList<Movimiento> movimientosEncontrados = BusquedaMovimientos.BuscarMovimientos("Ingreso");
+
+        AsignarListaMovimientos(movimientosEncontrados);
+    }
+
+    private void AsignarListaMovimientos(ObservableList<Movimiento> movimientos){
         lvListaMovimientos.itemsProperty().bind(Bindings.createObjectBinding(() -> movimientos, movimientos));
         lvListaMovimientos.setCellFactory(listView -> new MovimientoCell());
     }

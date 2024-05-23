@@ -5,10 +5,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.Base64;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-import java.security.Key;
-import java.util.Base64;
 
 public class EncryptionUtil {
     private static final String ALGORITHM = "AES";
@@ -33,18 +29,6 @@ public class EncryptionUtil {
 
     private static Key generateKey() {
         return new SecretKeySpec(KEY, ALGORITHM);
-    }
-
-    public static void main(String[] args) {
-        try {
-            String original = "HelloWorld";
-            String encrypted = encrypt(original);
-            System.out.println("Encrypted: " + encrypted);
-            String decrypted = decrypt(encrypted);
-            System.out.println("Decrypted: " + decrypted);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
 
