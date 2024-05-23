@@ -2,6 +2,7 @@ package com.example.finanzaspro;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -88,6 +89,7 @@ public class dashboardC implements Initializable {
     private void CargarRecordatorios(){
         ObservableList<Movimiento> recordatorios = ManejadorMovimiento.getRecordatorios();
         Collections.sort(recordatorios, Comparator.comparing(Movimiento::calcularDiasRestantes));
+        enviarRecordatoriosPorCorreo(recordatorios);
         lvListaRecordatorios.itemsProperty().bind(Bindings.createObjectBinding(() -> recordatorios, recordatorios));
         lvListaRecordatorios.setCellFactory(listView -> new RecordatorioCell());
     }
@@ -157,5 +159,21 @@ public class dashboardC implements Initializable {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    private void enviarRecordatoriosPorCorreo(ObservableList<Movimiento> recordatorios) {
+        StringBuilder cuerpoCorreo = new StringBuilder("Movimientos que faltan menos de 3 días para suceder:\n\n");
+
+        for (Movimiento movimiento : recordatorios) {
+            long diasRestantes = movimiento.calcularDiasRestantes();
+            if (diasRestantes < 3) {
+                cuerpoCorreo.append("Movimiento: ").append(movimiento.getTitulo())
+                        .append(", Días restantes: ").append(diasRestantes).append("\n");
+            }
+        }
+
+        // Enviar el correo
+        SendGridEmailService emailService = new SendGridEmailService();
+        emailService.sendEmail("Recordatorios de Movimientos", cuerpoCorreo.toString());
     }
 }
