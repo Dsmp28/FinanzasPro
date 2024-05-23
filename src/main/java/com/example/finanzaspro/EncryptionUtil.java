@@ -30,17 +30,6 @@ public class EncryptionUtil {
     private static Key generateKey() {
         return new SecretKeySpec(KEY, ALGORITHM);
     }
-
-    public static void main(String[] args) {
-        try {
-            String encryptedValue = encrypt("dsmonjep@gmail.com");
-            System.out.println("Encrypted value: " + encryptedValue);
-            String decryptedValue = decrypt(encryptedValue);
-            System.out.println("Decrypted value: " + decryptedValue);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
 
 
