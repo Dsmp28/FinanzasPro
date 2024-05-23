@@ -1,6 +1,5 @@
 package com.example.finanzaspro;
 
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.collections.ObservableList;
@@ -18,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class dashboardC implements Initializable {
@@ -42,6 +43,9 @@ public class dashboardC implements Initializable {
     @FXML
     private Button btnIngresos;
 
+    @FXML
+    private ListView lvListaRecordatorios;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,6 +53,7 @@ public class dashboardC implements Initializable {
         CargarIngresado();
         CargarEgresos();
         CargarPresupuesto();
+        CargarRecordatorios();
 
         lvListaMovimientos.setOnMouseClicked(this::listViewDoubleClick);
     }
@@ -78,6 +83,13 @@ public class dashboardC implements Initializable {
         ObservableList<Movimiento> movimientosEncontrados = BusquedaMovimientos.BuscarMovimientos("Ingreso");
 
         AsignarListaMovimientos(movimientosEncontrados);
+    }
+
+    private void CargarRecordatorios(){
+        ObservableList<Movimiento> recordatorios = ManejadorMovimiento.getRecordatorios();
+        Collections.sort(recordatorios, Comparator.comparing(Movimiento::calcularDiasRestantes));
+        lvListaRecordatorios.itemsProperty().bind(Bindings.createObjectBinding(() -> recordatorios, recordatorios));
+        lvListaRecordatorios.setCellFactory(listView -> new RecordatorioCell());
     }
 
     private void AsignarListaMovimientos(ObservableList<Movimiento> movimientos){
@@ -140,6 +152,7 @@ public class dashboardC implements Initializable {
             CargarIngresado();
             CargarEgresos();
             CargarPresupuesto();
+            CargarRecordatorios();
 
         }catch (IOException e){
             e.printStackTrace();

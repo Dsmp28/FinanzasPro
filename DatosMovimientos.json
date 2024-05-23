@@ -12,13 +12,13 @@
     "tipo": "BBbPkTBZXhsNAWxpUZiAbQ\u003d\u003d",
     "titulo": "0dK8jLt4K5eB7htMqNwXig\u003d\u003d",
     "esRecurrente": "xGRHGojFe1V7o6id9x58/A\u003d\u003d",
-    "categoria_id": "jtFlyWQUCUzNbrWLnFU+cg\u003d\u003d",
+    "categoria_id": "dchYvEml0KajYIKS3kjqYw\u003d\u003d",
     "cantidad": "Zlgylrv/YzRT0scyBNf5fg\u003d\u003d"
   },
   {
     "fecha": "PldkdlDZ3koO3QPt14NZ6A\u003d\u003d",
     "tipo": "BBbPkTBZXhsNAWxpUZiAbQ\u003d\u003d",
-    "intervaloDias": "AT5ZPs0KtoQucMFDSO/YJg\u003d\u003d",
+    "intervaloDias": "6d372iqLa/HO9R+w+8/kmQ\u003d\u003d",
     "titulo": "yMpihX0tOD+qoQgLGI42+g\u003d\u003d",
     "esRecurrente": "ZzZkXcxlcLfB4yTtdAlFOA\u003d\u003d",
     "categoria_id": "jtFlyWQUCUzNbrWLnFU+cg\u003d\u003d",
@@ -26,10 +26,20 @@
   },
   {
     "fecha": "Y/cWE7ao8uOIALv3VaP7Jw\u003d\u003d",
-    "tipo": "wfA9z3gwMRm03vASwpXI1w\u003d\u003d",
+    "tipo": "BBbPkTBZXhsNAWxpUZiAbQ\u003d\u003d",
+    "intervaloDias": "lPwy1KEB9ftfnw7+Nklozg\u003d\u003d",
     "titulo": "/YQ89zWe9F0xh5Xn/d33rQ\u003d\u003d",
-    "esRecurrente": "xGRHGojFe1V7o6id9x58/A\u003d\u003d",
+    "esRecurrente": "ZzZkXcxlcLfB4yTtdAlFOA\u003d\u003d",
     "categoria_id": "jtFlyWQUCUzNbrWLnFU+cg\u003d\u003d",
-    "cantidad": "GPQlsx9DM2KkFqN3wnvPsg\u003d\u003d"
+    "cantidad": "GruzQ+Yu1ckoo4TL+oZ+mA\u003d\u003d"
+  },
+  {
+    "fecha": "OAPSqEq+k51X6DRsdTyv9A\u003d\u003d",
+    "tipo": "wfA9z3gwMRm03vASwpXI1w\u003d\u003d",
+    "intervaloDias": "LMO6IwO9NQX9Z2nmKYDeSg\u003d\u003d",
+    "titulo": "oVMTAwLcchvV32oLJC4MNg\u003d\u003d",
+    "esRecurrente": "ZzZkXcxlcLfB4yTtdAlFOA\u003d\u003d",
+    "categoria_id": "7ZGxeHIApRsNIv2/4mkVUQ\u003d\u003d",
+    "cantidad": "xYSq1D3sgENkD/7ChPmbbg\u003d\u003d"
   }
 ]
