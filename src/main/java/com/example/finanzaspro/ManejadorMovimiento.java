@@ -30,6 +30,17 @@ public class ManejadorMovimiento {
         }
     }
 
+    public static ObservableList<Movimiento> getRecordatorios(){
+        leerMovimientosDesdeArchivo();
+        ObservableList<Movimiento> recordatorios = FXCollections.observableArrayList();
+        for (Movimiento movimiento : movimientos) {
+            if (movimiento.isEsRecurrente()) {
+                recordatorios.add(movimiento);
+            }
+        }
+        return recordatorios;
+    }
+
     private static void leerMovimientosDesdeArchivo() {
         ObservableList<Movimiento> movimientosDesdeArchivo = ManejadorEncriptacion.leerMovimientosDeJSON("DatosMovimientos.json", ManejadorCategoria.getCategorias());
         movimientos.setAll(movimientosDesdeArchivo);

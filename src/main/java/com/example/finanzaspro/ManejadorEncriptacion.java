@@ -244,4 +244,27 @@ public class ManejadorEncriptacion {
         return categorias;
     }
 
+    public static String leerTextoDeJSON(String archivoJSON, String titulo) {
+        File file = new File(archivoJSON);
+        if (!file.exists()) {
+            System.err.println("El archivo JSON no existe: " + archivoJSON);
+            return "";
+        }
+
+        String valor = "";
+        try (FileReader reader = new FileReader(file)) {
+            JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
+            if (jsonObject.has(titulo)) {
+                String montoEncriptado = jsonObject.get(titulo).getAsString();
+                valor = EncryptionUtil.decrypt(montoEncriptado);
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo JSON: " + e.getMessage());
+            throw new RuntimeException();
+        } catch (Exception e) {
+            return "";
+        }
+        return valor;
+    }
+
 }

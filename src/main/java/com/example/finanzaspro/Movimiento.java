@@ -1,6 +1,7 @@
 package com.example.finanzaspro;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Movimiento {
     private Categoria categoria;
@@ -35,6 +36,18 @@ public class Movimiento {
 
     public LocalDate getFecha() {
         return fecha;
+    }
+
+    public long calcularDiasRestantes() {
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaRegistro = this.getFecha();
+        long diasDesdeRegistro = ChronoUnit.DAYS.between(fechaRegistro, fechaActual);
+        long ciclosCompletos = diasDesdeRegistro / this.getIntervaloDias();
+
+        LocalDate fechaUltimoMovimiento = fechaRegistro.plusDays(ciclosCompletos * this.getIntervaloDias());
+        LocalDate fechaProximoMovimiento = fechaUltimoMovimiento.plusDays(this.getIntervaloDias());
+
+        return ChronoUnit.DAYS.between(fechaActual, fechaProximoMovimiento);
     }
 
     public boolean isEsRecurrente() {

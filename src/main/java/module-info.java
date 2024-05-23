@@ -6,7 +6,12 @@ module com.example.finanzaspro {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires com.google.gson;
+    requires java.http.client;
+    requires java.net.http;
+    requires com.fasterxml.jackson.databind;
 
     opens com.example.finanzaspro to javafx.fxml;
     exports com.example.finanzaspro;
 }
+
+

@@ -60,6 +60,7 @@
       <Pane layoutX="461.0" layoutY="404.0" prefHeight="111.0" prefWidth="264.0" styleClass="dashRecordatorios">
          <children>
             <Label layoutX="14.0" layoutY="14.0" styleClass="txtTituloPane" text="Recordatorios" />
+            <ListView fx:id="lvListaRecordatorios" layoutX="14.0" layoutY="31.0" prefHeight="70.0" prefWidth="233.0" />
          </children>
       </Pane>
       <Pane layoutX="461.0" layoutY="56.0" prefHeight="328.0" prefWidth="264.0">
