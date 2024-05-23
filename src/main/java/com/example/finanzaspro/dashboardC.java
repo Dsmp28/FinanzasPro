@@ -55,6 +55,7 @@ public class dashboardC implements Initializable {
         CargarEgresos();
         CargarPresupuesto();
         CargarRecordatorios();
+        ValidarEnviarCorreo();
 
         lvListaMovimientos.setOnMouseClicked(this::listViewDoubleClick);
     }
@@ -89,7 +90,6 @@ public class dashboardC implements Initializable {
     private void CargarRecordatorios(){
         ObservableList<Movimiento> recordatorios = ManejadorMovimiento.getRecordatorios();
         Collections.sort(recordatorios, Comparator.comparing(Movimiento::calcularDiasRestantes));
-        enviarRecordatoriosPorCorreo(recordatorios);
         lvListaRecordatorios.itemsProperty().bind(Bindings.createObjectBinding(() -> recordatorios, recordatorios));
         lvListaRecordatorios.setCellFactory(listView -> new RecordatorioCell());
     }
@@ -158,6 +158,23 @@ public class dashboardC implements Initializable {
 
         }catch (IOException e){
             e.printStackTrace();
+        }
+    }
+
+    private void ValidarEnviarCorreo(){
+        ObservableList<Movimiento> recordatorios = ManejadorMovimiento.getRecordatorios();
+        boolean enviarCorreo = false;
+
+        for (Movimiento movimiento : recordatorios) {
+            long diasRestantes = movimiento.calcularDiasRestantes();
+            if (diasRestantes < 3) {
+                enviarCorreo = true;
+                break;
+            }
+        }
+
+        if (enviarCorreo) {
+            enviarRecordatoriosPorCorreo(recordatorios);
         }
     }
 
