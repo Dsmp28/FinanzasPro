@@ -113,3 +113,9 @@
     -fx-font-family: "Roboto";
     -fx-font-weight: 700;
 }
+.list-view{
+    -fx-background-color: transparent;
+}
+.list-view .list-cell{
+    -fx-background-color: transparent;
+}

@@ -69,7 +69,27 @@ public class InversionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CargarInversion();
     }
+    @FXML
+    private void abrirAbono(){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("abono-view.fxml"));
+            Parent root = loader.load();
+            Stage emergente = new Stage();
 
+            emergente.initModality(Modality.APPLICATION_MODAL);
+            emergente.initStyle(javafx.stage.StageStyle.UTILITY);
+            emergente.setTitle("Abonar a Inversión");
+            emergente.setScene(new Scene(root));
+            abonoController controller = loader.getController();
+            controller.setStage(emergente);
+            emergente.showAndWait();
+
+            CargarInversion();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void abrirVentanaAgregarInversion() {
         try{

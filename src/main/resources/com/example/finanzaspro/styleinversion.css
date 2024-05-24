@@ -91,4 +91,13 @@
     -fx-font-family: "Roboto";
     -fx-font-weight: 700;
 }
-
+.btnEliminar{
+    -fx-cursor:  pointer;
+    -fx-border-width: 0px;
+    -fxborder-radius: 4px;
+    -fx-background-color: #cc3333;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
