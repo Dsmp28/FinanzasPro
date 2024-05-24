@@ -143,6 +143,7 @@ public class dashboardC implements Initializable {
             Stage emergente = new Stage();
 
             emergente.initModality(Modality.APPLICATION_MODAL);
+            emergente.initStyle(javafx.stage.StageStyle.UTILITY);
             emergente.setTitle("Editar movimiento");
             emergente.setScene(new Scene(root));
             editarController controller = loader.getController();
