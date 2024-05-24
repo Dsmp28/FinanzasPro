@@ -42,6 +42,9 @@ public class InversionController implements Initializable {
     private Label lbMesesAbonados;
 
     @FXML
+    private Label lbTxtTitulo;
+
+    @FXML
     private Label lbConsejo1;
 
     @FXML
@@ -67,6 +70,8 @@ public class InversionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        inversiones = ManejadorInversion.getInversiones();
+        currentIndex = inversiones.size() - 1;
         CargarInversion();
     }
     @FXML
@@ -82,6 +87,7 @@ public class InversionController implements Initializable {
             emergente.setScene(new Scene(root));
             abonoController controller = loader.getController();
             controller.setStage(emergente);
+            controller.setInversion(currentIndex);
             emergente.showAndWait();
 
             CargarInversion();
@@ -105,6 +111,7 @@ public class InversionController implements Initializable {
             controller.setStage(emergente);
             emergente.showAndWait();
 
+            currentIndex = inversiones.size() - 1;
             CargarInversion();
         }
         catch (IOException e){
@@ -113,10 +120,14 @@ public class InversionController implements Initializable {
     }
 
     @FXML
-    private void pruebaAbono(){
-        Inversion inversion = inversiones.get(currentIndex);
-        ManejadorInversion.agregarAbono(currentIndex, 3141.27);
-        mostrarInversion();
+    private void eliminarInversion(){
+        if (inversiones.size() > 0){
+            ManejadorInversion.eliminarInversion(currentIndex);
+            inversiones = ManejadorInversion.getInversiones();
+            currentIndex = inversiones.size() - 1;
+            ManejadorAlertas.showInformation("Exito", "Inversión eliminada", "Se ha eliminado la inversión exitosamente");
+            CargarInversion();
+        }
     }
 
     @FXML
@@ -136,18 +147,17 @@ public class InversionController implements Initializable {
     }
 
     private void CargarInversion(){
-        inversiones = ManejadorInversion.getInversiones();
-        currentIndex = inversiones.size() - 1;
         if (inversiones.isEmpty()){
             lbAbonado.setText("Q. 0.0");
             lbGanado.setText("Q. 0.0");
+            lbTxtTitulo.setText("No tienes inversiones registradas");
             lbValorActual.setText("Q. 0.0");
             lbPorcentaje.setText("0%");
             lbMeta.setText("Q0.0");
             piProgreso.setProgress(0);
             lbMesesAbonados.setText("0 / 0 meses");
             lbConsejo1.setText("No tienes inversiones registradas");
-            lbRetornoActual.setText("Retorno actual (0%)");
+            lbRetornoActual.setText("Tasa mensual actual (0%)");
         } else {
             mostrarInversion();
         }
@@ -158,8 +168,9 @@ public class InversionController implements Initializable {
         lbAbonado.setText("Q. " + String.format("%.2f", inversion.calcularTotalDineroAnadido()));
         lbGanado.setText("Q. " + String.format("%.2f", inversion.calcularDineroGanado()));
         lbValorActual.setText("Q. " + String.format("%.2f", inversion.getValorActual()));
+        lbTxtTitulo.setText(inversion.getNombre());
         lbMesesAbonados.setText(inversion.getAbonosMensuales().size() + " / " + inversion.getPlazoMeses() + " meses");
-        lbRetornoActual.setText("Retorno actual (" + (int) Math.round(inversion.getTasaRetorno() * 100) + "%)");
+        lbRetornoActual.setText("Tasa mensual actual (" + (int) Math.round(inversion.getTasaRetorno() * 100) + "%)");
         if (ValidarInversion(inversion)){
             btnAbonar.setDisable(true);
         }else {

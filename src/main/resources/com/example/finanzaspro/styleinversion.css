@@ -10,6 +10,12 @@
     -fx-font-family: "Roboto";
     -fx-font-weight: 800;
 }
+.txtTitulo{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 16px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 800;
+}
 .txtTasa{
     -fx-text-fill: #99CC00;
     -fx-font-size: 12px;

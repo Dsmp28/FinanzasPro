@@ -16,9 +16,14 @@ public class ManejadorInversion {
         return inversiones;
     }
 
-    public static void agregarInversion(double montoMeta, double tasaRetorno, int plazoMeses) {
-        Inversion nuevaInversion = new Inversion(montoMeta, tasaRetorno, plazoMeses);
+    public static void agregarInversion(double montoMeta, double tasaRetorno, int plazoMeses, String nombre) {
+        Inversion nuevaInversion = new Inversion(montoMeta, tasaRetorno, plazoMeses, nombre);
         inversiones.add(nuevaInversion);
+        guardarInversionesEnArchivo();
+    }
+
+    public static void eliminarInversion(int index) {
+        inversiones.remove(index);
         guardarInversionesEnArchivo();
     }
 

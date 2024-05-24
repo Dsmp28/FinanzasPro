@@ -16,6 +16,9 @@ public class nuevaInvController {
     private TextField txtTasa;
 
     @FXML
+    private TextField txtTitulo;
+
+    @FXML
     private Button txtAggInv;
 
     private Stage stage;
@@ -35,14 +38,15 @@ public class nuevaInvController {
             double monto = Double.parseDouble(txtMonto.getText());
             int plazo = Integer.parseInt(txtPlazo.getText());
             double tasa = Double.parseDouble(txtTasa.getText());
-            ManejadorInversion.agregarInversion(monto, tasa, plazo);
+            String titulo = txtTitulo.getText();
+            ManejadorInversion.agregarInversion(monto, tasa, plazo, titulo);
             ManejadorAlertas.showInformation("Inversión agregada", "Inversión agregada", "La inversión ha sido agregada exitosamente");
             stage.close();
         }
     }
 
     private boolean validarCampos() {
-        if (txtMonto.getText().isEmpty() || txtPlazo.getText().isEmpty() || txtTasa.getText().isEmpty()) {
+        if (txtMonto.getText().isEmpty() || txtPlazo.getText().isEmpty() || txtTasa.getText().isEmpty() || txtTitulo.getText().isEmpty()) {
             ManejadorAlertas.showError("Error", "Faltan datos obligatorios", "Por favor, llene todos los campos obligatorios");
             return false;
         } else {
