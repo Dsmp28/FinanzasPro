@@ -281,6 +281,7 @@ public class ManejadorEncriptacion {
                 inversionEncriptada.put("montoMeta", EncryptionUtil.encrypt(Double.toString(inversion.getMontoMeta())));
                 inversionEncriptada.put("tasaRetorno", EncryptionUtil.encrypt(Double.toString(inversion.getTasaRetorno())));
                 inversionEncriptada.put("plazoMeses", EncryptionUtil.encrypt(Integer.toString(inversion.getPlazoMeses())));
+                inversionEncriptada.put("nombre", EncryptionUtil.encrypt(inversion.getNombre()));
                 inversionEncriptada.put("valorActual", EncryptionUtil.encrypt(Double.toString(inversion.getValorActual())));
 
                 // Encriptar los abonos mensuales
@@ -337,8 +338,9 @@ public class ManejadorEncriptacion {
                         for (String abonoMensualEncriptado : abonosMensualesEncriptados) {
                             abonosMensuales.add(Double.parseDouble(EncryptionUtil.decrypt(abonoMensualEncriptado)));
                         }
+                        String nombre = EncryptionUtil.decrypt(datos.get("nombre"));
 
-                        Inversion inversion = new Inversion(montoMeta, tasaRetorno, plazoMeses);
+                        Inversion inversion = new Inversion(montoMeta, tasaRetorno, plazoMeses, nombre);
                         for (Double abonoMensual : abonosMensuales) {
                             inversion.agregarAbono(abonoMensual);
                         }

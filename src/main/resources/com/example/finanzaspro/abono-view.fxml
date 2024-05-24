@@ -17,10 +17,10 @@
       <VBox layoutX="13.0" layoutY="56.0" prefHeight="64.0" prefWidth="225.0">
          <children>
             <Label styleClass="txtTituloCampo" text="Ingresa la cantidad que desea abonar." />
-            <TextField fx:id="txtTitulo" prefHeight="30.0" prefWidth="434.0" promptText="Cantidad" styleClass="textBoxCampo" />
+            <TextField fx:id="txtCantidad" prefHeight="30.0" prefWidth="434.0" promptText="Cantidad" styleClass="textBoxCampo" />
          </children>
       </VBox>
-      <Button fx:id="btnAbono" alignment="CENTER" layoutX="13.0" layoutY="120.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="225.0" styleClass="btnIngreso" text="Abonar" textAlignment="RIGHT" />
+      <Button fx:id="btnAbono" alignment="CENTER" layoutX="13.0" layoutY="120.0" mnemonicParsing="false" onAction="#agregarAbono" prefHeight="27.0" prefWidth="225.0" styleClass="btnIngreso" text="Abonar" textAlignment="RIGHT" />
       <Button fx:id="btnSalir" layoutX="215.0" layoutY="22.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cerrar" prefHeight="16.0" prefWidth="16.0" styleClass="btnSalir">
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="btnSalir">

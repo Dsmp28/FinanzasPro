@@ -9,12 +9,14 @@ public class Inversion {
     private int plazoMeses;
     private List<Double> abonosMensuales;
     private double valorActual; // Nuevo campo para el valor actual
+    private String nombre;
 
-    public Inversion(double montoMeta, double tasaRetorno, int plazoMeses) {
+    public Inversion(double montoMeta, double tasaRetorno, int plazoMeses, String nombre) {
         this.montoMeta = montoMeta;
         this.tasaRetorno = tasaRetorno;
         this.plazoMeses = plazoMeses;
         this.abonosMensuales = new ArrayList<>();
+        this.nombre = nombre;
         this.valorActual = calcularValorActual(); // Inicializar el valor actual
     }
 
@@ -66,6 +68,10 @@ public class Inversion {
 
     public double getValorActual() {
         return valorActual; // Nuevo método getter para el valor actual
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
 }
