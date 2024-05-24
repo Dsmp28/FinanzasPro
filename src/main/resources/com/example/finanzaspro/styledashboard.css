@@ -119,3 +119,36 @@
 .list-view .list-cell{
     -fx-background-color: transparent;
 }
+.btnTransp{
+    -fx-background-color: transparent;
+    -fx-text-fill: #55595f;
+    -fx-font-size: 10px;
+    -fx-font-family: "Roboto";
+    -fx-border-width: 0px;
+    -fx-text-alignment: right;
+}
+.txtTitInv{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 12px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+
+}
+.txtPorcentaje{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 10px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
+.txtInvTxt{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 10px;
+    -fx-font-family: "Roboto";
+}
+.progress-bar{
+    -fx-accent: #1e1f26;
+}
+.progress-bar > .bar{
+    -fx-background-insets: 0, 1, 2;
+    -fx-padding: 0.416667em; /* 5 */
+}
