@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
@@ -51,6 +52,62 @@
       <Pane layoutX="33.0" layoutY="404.0" prefHeight="112.0" prefWidth="200.0" styleClass="dashInversion">
          <children>
             <Label layoutX="14.0" layoutY="14.0" styleClass="txtTituloPane" text="Inversión" />
+            <Button fx:id="btnVerInv" alignment="CENTER_RIGHT" layoutX="122.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnVerInv" prefHeight="21.0" prefWidth="64.0" styleClass="btnTransp" text="Ver todos" textAlignment="RIGHT">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <HBox layoutY="23.0" prefHeight="77.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btnAnterior" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="83.0" prefWidth="22.0" styleClass="btnTransp">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/flechaizq.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <VBox alignment="CENTER" prefHeight="83.0" prefWidth="27.0">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/bolsa.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="127.0">
+                     <children>
+                        <Label fx:id="lbTitulo" styleClass="txtTitInv" text="Título" />
+                        <Label fx:id="lbPorcentaje" styleClass="txtPorcentaje" text="100% alcanzado" />
+                        <ProgressBar prefWidth="200.0" progress="0.22" />
+                        <Label fx:id="lbRestante" styleClass="txtInvTxt" text="11 meses restantes" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </VBox>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="83.0" prefWidth="22.0" styleClass="btnTransp">
+                     <graphic>
+                        <ImageView fx:id="btnSiguiente" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/flechader.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </HBox>
          </children>
       </Pane>
       <Pane layoutX="245.0" layoutY="404.0" prefHeight="112.0" prefWidth="200.0" styleClass="dashCategoria">
