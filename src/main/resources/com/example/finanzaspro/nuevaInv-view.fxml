@@ -33,12 +33,12 @@
          <children>
             <Label styleClass="txtTituloCampo" text="Monto de la meta *" />
             <TextField fx:id="txtMonto" prefHeight="62.0" prefWidth="466.0" promptText="Valor en quetzales" styleClass="textBoxCampo" />
-            <Label styleClass="txtTituloCampo" text="Tasa de retorno brindada por el banco *">
+            <Label styleClass="txtTituloCampo" text="Tasa de retorno mensual de la inversion (en decimales) *">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="txtTasa" prefHeight="54.0" prefWidth="474.0" promptText="Ejemplo: 4.75" styleClass="textBoxCampo" />
+            <TextField fx:id="txtTasa" prefHeight="54.0" prefWidth="474.0" promptText="Ejemplo: 0.5" styleClass="textBoxCampo" />
             <Label styleClass="txtTituloCampo" text="Plazo para llenarlo (en meses) *">
                <VBox.margin>
                   <Insets top="10.0" />
@@ -47,6 +47,6 @@
             <TextField fx:id="txtPlazo" prefHeight="54.0" prefWidth="474.0" promptText="Plazo en meses" styleClass="textBoxCampo" />
          </children>
       </VBox>
-      <Button fx:id="btnNuevo" alignment="CENTER" layoutX="125.0" layoutY="285.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="245.0" styleClass="btnIngreso" text="Añadir" textAlignment="RIGHT" />
+      <Button fx:id="btnNuevo" alignment="CENTER" layoutX="125.0" layoutY="285.0" mnemonicParsing="false" onAction="#agregarInversion" prefHeight="27.0" prefWidth="245.0" styleClass="btnIngreso" text="Añadir" textAlignment="RIGHT" />
    </children>
 </Pane>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="250.0" styleClass="menuPrincipal" stylesheets="@styleeditar.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finanzaspro.abonoController">
+   <children>
+      <VBox layoutX="14.0" layoutY="15.0" prefHeight="30.0" prefWidth="201.0">
+         <children>
+            <Label styleClass="txtTitulo" text="Abonar a inversión" />
+            <Line endX="58.09288024902344" endY="6.02841391810216E-5" fill="#f8f9fa" startX="-100.0" stroke="#f8f9fa" />
+         </children>
+      </VBox>
+      <VBox layoutX="13.0" layoutY="56.0" prefHeight="64.0" prefWidth="225.0">
+         <children>
+            <Label styleClass="txtTituloCampo" text="Ingresa la cantidad que desea abonar." />
+            <TextField fx:id="txtTitulo" prefHeight="30.0" prefWidth="434.0" promptText="Cantidad" styleClass="textBoxCampo" />
+         </children>
+      </VBox>
+      <Button fx:id="btnAbono" alignment="CENTER" layoutX="13.0" layoutY="120.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="225.0" styleClass="btnIngreso" text="Abonar" textAlignment="RIGHT" />
+      <Button fx:id="btnSalir" layoutX="215.0" layoutY="22.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cerrar" prefHeight="16.0" prefWidth="16.0" styleClass="btnSalir">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="btnSalir">
+               <image>
+                  <Image url="@icons/x.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic></Button>
+   </children>
+</Pane>

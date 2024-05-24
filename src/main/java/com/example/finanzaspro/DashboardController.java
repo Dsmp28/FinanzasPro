@@ -107,6 +107,9 @@ public class DashboardController implements Initializable {
     public Button getBtnRegistrar(){
         return btnRegistrar;
     }
+    public Button getBtnTransaccion(){
+        return btnTransaccion;
+    }
 }
 
 

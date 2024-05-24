@@ -1,12 +1,15 @@
 package com.example.finanzaspro;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class RecordatorioCell extends ListCell<Movimiento> {
     private HBox content;
+    private ImageView imagen;
     private Text titulo;
     private Text categoria;
     private Text cantidad;
@@ -15,26 +18,26 @@ public class RecordatorioCell extends ListCell<Movimiento> {
     public RecordatorioCell() {
         super();
 
+        imagen = new ImageView();
+        imagen.setFitHeight(20);
+        imagen.setFitWidth(20);
         titulo = new Text();
-        titulo.setStyle("-fx-font-weight: bold");
+        titulo.setStyle("-fx-font-weight: bold; -fx-font-size: 10px");
 
         categoria = new Text();
 
         cantidad = new Text();
+        cantidad.setStyle("-fx-font-size: 8px");
 
         diasRestantes = new Text();
         diasRestantes.setStyle("-fx-fill: '#55595f'; -fx-font-size: 10px");
 
-        VBox vBox = new VBox(cantidad, diasRestantes);
-        vBox.setSpacing(5);
-        vBox.alignmentProperty().setValue(javafx.geometry.Pos.CENTER_RIGHT);
+        HBox hBox = new HBox(titulo, cantidad, diasRestantes);
+        hBox.setSpacing(10);
+        hBox.setAlignment(Pos.CENTER_RIGHT);
 
-        VBox vBoxTituloCategoria = new VBox(titulo, categoria);
-        vBoxTituloCategoria.setSpacing(5);
-
-        content = new HBox(vBoxTituloCategoria, vBox);
-        content.setHgrow(vBox, javafx.scene.layout.Priority.ALWAYS);
-        content.setSpacing(10); // Espacio entre la imagen y el texto
+        content = new HBox(imagen, hBox);
+        content.setSpacing(10);
         content.setPadding(new javafx.geometry.Insets(5));
         content.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
     }
@@ -43,15 +46,16 @@ public class RecordatorioCell extends ListCell<Movimiento> {
     protected void updateItem(Movimiento item, boolean empty) {
         super.updateItem(item, empty);
         if (item != null && !empty) {
+            imagen.setImage(item.getCategoria().getImagen());
             titulo.setText(item.getTitulo());
             categoria.setText(item.getCategoria().getTitulo());
             cantidad.setText(String.format("Q. %.2f", item.getCantidad()));
             diasRestantes.setText(String.format("%d días restantes", item.calcularDiasRestantes()));
 
             if (item.getCantidad() < 0) {
-                cantidad.setStyle("-fx-fill: 'red'; -fx-font-weight: bold; -fx-font-size: 14px");
+                cantidad.setStyle("-fx-fill: 'red'; -fx-font-weight: bold; -fx-font-size: 10px");
             } else {
-                cantidad.setStyle("-fx-fill: 'green'; -fx-font-weight: bold; -fx-font-size:14px");
+                cantidad.setStyle("-fx-fill: 'green'; -fx-font-weight: bold; -fx-font-size:10px");
             }
             setGraphic(content);
         } else {

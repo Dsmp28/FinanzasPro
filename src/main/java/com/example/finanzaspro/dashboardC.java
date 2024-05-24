@@ -22,7 +22,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.ResourceBundle;
 
-public class dashboardC implements Initializable {
+public class dashboardC implements Initializable, paneController{
+
+    private DashboardController dashboardController;
+
     @FXML
     private Label txtPresupuesto;
 
@@ -47,9 +50,13 @@ public class dashboardC implements Initializable {
     @FXML
     private ListView lvListaRecordatorios;
 
+    @FXML
+    private Button btnCompleto;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        btnCompleto();
         MostrarTodosMovimientos();
         CargarIngresado();
         CargarEgresos();
@@ -193,5 +200,16 @@ public class dashboardC implements Initializable {
         // Enviar el correo
         SendGridEmailService emailService = new SendGridEmailService();
         emailService.sendEmail("Recordatorios de Movimientos", cuerpoCorreo.toString());
+    }
+    public void btnCompleto(){
+        btnCompleto.setOnAction(event -> {
+            if(dashboardController != null){
+                dashboardController.cambiarVista("movimientos-view.fxml", dashboardController.getBtnTransaccion());
+            }
+        });
+    }
+    @Override
+    public void setDashboardController(DashboardController dashboardController) {
+        this.dashboardController = dashboardController;
     }
 }
