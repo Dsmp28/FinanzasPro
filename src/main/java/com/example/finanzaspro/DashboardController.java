@@ -110,6 +110,9 @@ public class DashboardController implements Initializable {
     public Button getBtnTransaccion(){
         return btnTransaccion;
     }
+    public Button getBtnInversion(){
+        return btnInversion;
+    }
 }
 
 

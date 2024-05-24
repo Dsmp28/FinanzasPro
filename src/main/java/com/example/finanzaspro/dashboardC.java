@@ -53,6 +53,8 @@ public class dashboardC implements Initializable, paneController{
     @FXML
     private Button btnCompleto;
 
+    @FXML
+    private Button btnVerInv;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -211,5 +213,12 @@ public class dashboardC implements Initializable, paneController{
     @Override
     public void setDashboardController(DashboardController dashboardController) {
         this.dashboardController = dashboardController;
+    }
+    public void btnVerInv(){
+        btnVerInv.setOnAction(event -> {
+            if(dashboardController != null){
+                dashboardController.cambiarVista("inversion-view.fxml", dashboardController.getBtnInversion());
+            }
+        });
     }
 }
