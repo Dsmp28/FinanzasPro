@@ -80,6 +80,11 @@ public class DashboardController implements Initializable {
             botonActivo(btnTransaccion, "movimientos-view.fxml");
         });
     }
+    public void btnInversion(){
+        btnInversion.setOnAction(event -> {
+            botonActivo(btnInversion, "inversion-view.fxml");
+        });
+    }
     public void btnSalir(){
         btnSalir.setOnAction(event -> {
             salir();
