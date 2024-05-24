@@ -82,6 +82,20 @@ public class editarController {
     }
 
     @FXML
+    public void eliminarMovimiento(){
+        ManejadorMovimiento.getMovimientos().remove(movimiento);
+
+        ManejadorEncriptacion.guardarMovimientosEnJSON(ManejadorMovimiento.getMovimientos(), "DatosMovimientos.json");
+
+        ManejadorIngreso.getInstancia().actualizarIngresos();
+        ManejadorEgresos.getInstancia().actualizarEgresos();
+        ControladorPresupuesto.getInstancia().actualizarPresupuesto();
+
+        ManejadorAlertas.showInformation("Movimiento eliminado", "Movimiento eliminado exitosamente", "El movimiento ha sido editado exitosamente");
+        stage.close();
+    }
+
+    @FXML
     private void guardarMovimiento(){
         if (ValidarDatosObligatorios()){
             try{
