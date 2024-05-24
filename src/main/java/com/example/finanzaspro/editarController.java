@@ -20,7 +20,6 @@ public class editarController {
 
     @FXML
     private TextField txtDias;
-    ;
 
     @FXML
     private ComboBox<Categoria> cbCategoria;

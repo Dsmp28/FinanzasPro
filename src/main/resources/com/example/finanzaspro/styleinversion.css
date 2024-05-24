@@ -43,6 +43,12 @@
 .progress-indicator .percentage {
     -fx-fill:null;
 }
+.txtConsejosT{
+    -fx-text-fill: #1e1f26;
+    -fx-font-size: 14px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 800;
+}
 .txtConsejos{
     -fx-text-fill: #1e1f26;
     -fx-font-size: 14px;
@@ -67,3 +73,22 @@
     -fx-font-size: 12px;
     -fx-font-family: "Roboto";
 }
+.btnIngreso{
+    -fx-cursor:  pointer;
+    -fxborder-radius: 4px;
+    -fx-background-color: #99CC00;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
+.btnIngresarPago{
+    -fx-cursor:  pointer;
+    -fxborder-radius: 4px;
+    -fx-background-color: #030303;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+}
+
