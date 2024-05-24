@@ -28,4 +28,37 @@ public class nuevaInvController {
     private void cerrar(){
         stage.close();
     }
+
+    @FXML
+    private void agregarInversion() {
+        if (validarCampos()) {
+            double monto = Double.parseDouble(txtMonto.getText());
+            int plazo = Integer.parseInt(txtPlazo.getText());
+            double tasa = Double.parseDouble(txtTasa.getText());
+            ManejadorInversion.agregarInversion(monto, tasa, plazo);
+            ManejadorAlertas.showInformation("Inversión agregada", "Inversión agregada", "La inversión ha sido agregada exitosamente");
+            stage.close();
+        }
+    }
+
+    private boolean validarCampos() {
+        if (txtMonto.getText().isEmpty() || txtPlazo.getText().isEmpty() || txtTasa.getText().isEmpty()) {
+            ManejadorAlertas.showError("Error", "Faltan datos obligatorios", "Por favor, llene todos los campos obligatorios");
+            return false;
+        } else {
+            try {
+                if (Double.parseDouble(txtTasa.getText()) <= 0) {
+                    ManejadorAlertas.showError("Error", "Cantidad inválida", "Por favor, ingrese un número mayor a 0 en el campo de tasa de retorno");
+                    return false;
+                } else if (Integer.parseInt(txtPlazo.getText()) <= 0) {
+                    ManejadorAlertas.showError("Error", "Cantidad inválida", "Por favor, ingrese un número mayor a 0 en el campo de plazo para llenarlo");
+                    return false;
+                }
+            } catch (NumberFormatException e) {
+                ManejadorAlertas.showError("Error", "Cantidad inválida", "Por favor, ingrese un número válido en el campo de tasa de retorno");
+                return false;
+            }
+        }
+        return true;
+    }
 }

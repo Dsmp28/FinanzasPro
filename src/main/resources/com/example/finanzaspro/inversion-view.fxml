@@ -18,9 +18,9 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="282.0" prefWidth="48.0">
                            <children>
-                              <Button fx:id="btnAtras" alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="24.0" styleClass="btnes">
+                              <Button fx:id="btnAtras" alignment="CENTER" mnemonicParsing="false" onAction="#anteriorInversion" prefHeight="40.0" prefWidth="24.0" styleClass="btnes">
                                  <graphic>
-                                    <ImageView fitHeight="205.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="205.0" fitWidth="32.0" onMouseClicked="#anteriorInversion" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@icons/flechaizq.png" />
                                        </image>
@@ -43,8 +43,8 @@
                                                 <Image url="@icons/semilla.png" />
                                              </image>
                                           </ImageView>
-                                          <Label alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="135.0" styleClass="txtApartado" text="Añadido" />
-                                          <Label fx:id="lbActual" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="32.0" prefWidth="315.0" styleClass="txtNumero" text="Q. 1,519.40" />
+                                          <Label alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="135.0" styleClass="txtApartado" text="Abonado" />
+                                          <Label fx:id="lbAbonado" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="32.0" prefWidth="315.0" styleClass="txtNumero" text="Q. 1,519.40" />
                                        </children>
                                     </HBox>
                                     <Line endX="281.69287109375" endY="-1.414225697517395" opacity="0.15" startX="-100.0" stroke="#515151">
@@ -78,7 +78,7 @@
                                           <VBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="162.0">
                                              <children>
                                                 <Label styleClass="txtApartado" text="Valor actual" />
-                                                <Label styleClass="txtTasa" text="Retorno actual (6.75%)" />
+                                                <Label fx:id="lbRetornoActual" styleClass="txtTasa" text="Retorno actual (6.75%)" />
                                              </children>
                                              <HBox.margin>
                                                 <Insets left="15.0" />
@@ -98,23 +98,23 @@
                            <children>
                               <Pane prefHeight="156.0" prefWidth="156.0">
                                  <children>
-                                    <ProgressIndicator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="156.0" prefWidth="156.0" progress="0.15" />
+                                    <ProgressIndicator fx:id="piProgreso" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="156.0" prefWidth="156.0" progress="0.15" />
                                     <Circle fill="WHITE" layoutX="78.0" layoutY="78.0" radius="50.0" stroke="WHITE" strokeType="INSIDE" styleClass="circulo" />
                                     <VBox alignment="CENTER" prefHeight="156.0" prefWidth="156.0">
                                        <children>
-                                          <Label fx:id="lbPorcentaje" styleClass="txtPorcentaje" text="29 %" />
+                                          <Label fx:id="lbPorcentaje" styleClass="txtPorcentaje" text="29%" />
                                           <Label fx:id="lbMeta1" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="80.0" styleClass="txtComplemento" text="de" />
                                           <Label fx:id="lbMeta" alignment="CENTER" prefHeight="18.0" prefWidth="80.0" styleClass="txtComplemento" text="Q1,000,000.00" />
                                        </children>
                                     </VBox>
                                  </children>
                               </Pane>
-                              <Label styleClass="txtMeses" text="4 / 48 meses" />
+                              <Label fx:id="lbMesesAbonados" styleClass="txtMeses" text="4 / 48 meses" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="338.0" prefWidth="31.0">
                            <children>
-                              <Button fx:id="btnSiguiente" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="btnes">
+                              <Button fx:id="btnSiguiente" mnemonicParsing="false" onAction="#siguienteInversion" prefHeight="40.0" prefWidth="56.0" styleClass="btnes">
                                  <graphic>
                                     <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

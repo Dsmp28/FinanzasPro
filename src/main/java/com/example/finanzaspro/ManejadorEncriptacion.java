@@ -267,4 +267,94 @@ public class ManejadorEncriptacion {
         return valor;
     }
 
+    public static void guardarInversionEnJson(List<Inversion> inversiones, String archivoJSON) {
+        File file = new File(archivoJSON);
+        if (!file.exists()) {
+            System.err.println("El archivo JSON no existe: " + archivoJSON);
+            return;
+        }
+
+        try {
+            List<Map<String, String>> datosEncriptados = new ArrayList<>();
+            for (Inversion inversion : inversiones) {
+                Map<String, String> inversionEncriptada = new HashMap<>();
+                inversionEncriptada.put("montoMeta", EncryptionUtil.encrypt(Double.toString(inversion.getMontoMeta())));
+                inversionEncriptada.put("tasaRetorno", EncryptionUtil.encrypt(Double.toString(inversion.getTasaRetorno())));
+                inversionEncriptada.put("plazoMeses", EncryptionUtil.encrypt(Integer.toString(inversion.getPlazoMeses())));
+                inversionEncriptada.put("valorActual", EncryptionUtil.encrypt(Double.toString(inversion.getValorActual())));
+
+                // Encriptar los abonos mensuales
+                List<String> abonosMensualesEncriptados = new ArrayList<>();
+                for (Double abonoMensual : inversion.getAbonosMensuales()) {
+                    abonosMensualesEncriptados.add(EncryptionUtil.encrypt(Double.toString(abonoMensual)));
+                }
+
+                // Convertir la lista de abonos mensuales encriptados a una cadena JSON
+                Gson gson = new Gson();
+                String abonosMensualesJson = gson.toJson(abonosMensualesEncriptados);
+
+                // Agregar la cadena JSON de abonos mensuales encriptados al mapa de la inversión encriptada
+                inversionEncriptada.put("abonosMensuales", abonosMensualesJson);
+
+                datosEncriptados.add(inversionEncriptada);
+            }
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            try (FileWriter writer = new FileWriter(file, false)) { // `false` para no agregar sino sobreescribir
+                gson.toJson(datosEncriptados, writer);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ObservableList<Inversion> leerInversionesDeJSON(String archivoJSON) {
+        File file = new File(archivoJSON);
+        if (!file.exists()) {
+            System.err.println("El archivo JSON no existe: " + archivoJSON);
+            return FXCollections.observableArrayList();
+        }
+
+        ObservableList<Inversion> inversiones = FXCollections.observableArrayList();
+        try {
+            Gson gson = new Gson();
+            Type tipoListaInversiones = new TypeToken<List<Map<String, String>>>() {}.getType();
+            try (FileReader reader = new FileReader(file)) {
+                List<Map<String, String>> datosEncriptados = gson.fromJson(reader, tipoListaInversiones);
+
+                if (datosEncriptados != null){
+                    for (Map<String, String> datos : datosEncriptados) {
+                        double montoMeta = Double.parseDouble(EncryptionUtil.decrypt(datos.get("montoMeta")));
+                        double tasaRetorno = Double.parseDouble(EncryptionUtil.decrypt(datos.get("tasaRetorno")));
+                        int plazoMeses = Integer.parseInt(EncryptionUtil.decrypt(datos.get("plazoMeses")));
+                        double valorActual = Double.parseDouble(EncryptionUtil.decrypt(datos.get("valorActual")));
+
+                        // Desencriptar los abonos mensuales
+                        String abonosMensualesJson = datos.get("abonosMensuales");
+                        Type tipoListaAbonosMensuales = new TypeToken<List<String>>() {}.getType();
+                        List<String> abonosMensualesEncriptados = gson.fromJson(abonosMensualesJson, tipoListaAbonosMensuales);
+                        List<Double> abonosMensuales = new ArrayList<>();
+                        for (String abonoMensualEncriptado : abonosMensualesEncriptados) {
+                            abonosMensuales.add(Double.parseDouble(EncryptionUtil.decrypt(abonoMensualEncriptado)));
+                        }
+
+                        Inversion inversion = new Inversion(montoMeta, tasaRetorno, plazoMeses);
+                        for (Double abonoMensual : abonosMensuales) {
+                            inversion.agregarAbono(abonoMensual);
+                        }
+
+                        inversiones.add(inversion);
+                    }
+                }else {
+                    return inversiones;
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo JSON: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return inversiones;
+    }
+
 }

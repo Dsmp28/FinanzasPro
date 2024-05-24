@@ -13,6 +13,8 @@ public class ControladorPresupuesto {
         presupuesto = new Presupuesto(presupuestoOriginal + calcularMontoTotal(movimientos));
     }
 
+    //100,000 en 12 meses - 7884.88
+
     public void actualizarPresupuesto() {
         ObservableList<Movimiento> movimientos = ManejadorEncriptacion.leerMovimientosDeJSON("DatosMovimientos.json", ManejadorCategoria.getCategorias());
         double cantidad = calcularMontoTotal(movimientos);
