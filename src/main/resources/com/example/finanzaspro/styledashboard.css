@@ -113,10 +113,10 @@
     -fx-font-family: "Roboto";
     -fx-font-weight: 700;
 }
-.list-view{
+.listRecordatorios{
     -fx-background-color: transparent;
 }
-.list-view .list-cell{
+.listRecordatorios .list-cell{
     -fx-background-color: transparent;
 }
 .btnTransp{
