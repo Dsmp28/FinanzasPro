@@ -99,8 +99,8 @@
                               <Pane prefHeight="156.0" prefWidth="156.0">
                                  <children>
                                     <ProgressIndicator fx:id="piProgreso" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="156.0" prefWidth="156.0" progress="0.15" />
-                                    <Circle fill="WHITE" layoutX="78.0" layoutY="78.0" radius="50.0" stroke="WHITE" strokeType="INSIDE" styleClass="circulo" />
-                                    <VBox alignment="CENTER" prefHeight="156.0" prefWidth="156.0">
+                                    <Circle fx:id="circuloFondo" fill="WHITE" layoutX="78.0" layoutY="78.0" radius="50.0" stroke="WHITE" strokeType="INSIDE" styleClass="circulo" />
+                                    <VBox fx:id="vbPanelPorcentaje" alignment="CENTER" prefHeight="156.0" prefWidth="156.0">
                                        <children>
                                           <Label fx:id="lbPorcentaje" styleClass="txtPorcentaje" text="29%" />
                                           <Label fx:id="lbMeta1" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="80.0" styleClass="txtComplemento" text="de" />
@@ -137,7 +137,7 @@
             </Pane>
          </children>
       </StackPane>
-      <Button fx:id="btnAbonar" alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="380.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="221.0" styleClass="btnIngresarPago" text="Abonar pago" textAlignment="CENTER" />
+      <Button fx:id="btnAbonar" alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="380.0" mnemonicParsing="false" onAction="#pruebaAbono" prefHeight="27.0" prefWidth="221.0" styleClass="btnIngresarPago" text="Abonar pago" textAlignment="CENTER" />
       <Label fx:id="lbConsejo" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="427.0" prefHeight="27.0" prefWidth="677.0" styleClass="txtConsejosT" text="Consejo para alcanzar la meta:" />
       <Label fx:id="lbConsejo1" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="448.0" prefHeight="27.0" prefWidth="677.0" styleClass="txtConsejos" text="Consejos personalizados" />
       <Button fx:id="btnAggInv" alignment="CENTER" layoutX="493.0" layoutY="33.0" mnemonicParsing="false" onAction="#abrirVentanaAgregarInversion" prefHeight="27.0" prefWidth="221.0" styleClass="btnIngreso" text="Agregar inversión" textAlignment="RIGHT" />

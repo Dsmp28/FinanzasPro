@@ -22,6 +22,12 @@ public class ManejadorInversion {
         guardarInversionesEnArchivo();
     }
 
+    public static void agregarAbono(int index, double abono) {
+        Inversion inversion = inversiones.get(index);
+        inversion.agregarAbono(abono);
+        guardarInversionesEnArchivo();
+    }
+
     private static void leerInversionesDesdeArchivo() {
         ObservableList<Inversion> inversionesDesdeArchivo = ManejadorEncriptacion.leerInversionesDeJSON("DatoInversiones.json");
         inversiones.setAll(inversionesDesdeArchivo);
