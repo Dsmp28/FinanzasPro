@@ -57,6 +57,9 @@ public class nuevaInvController {
                 } else if (Integer.parseInt(txtPlazo.getText()) <= 0) {
                     ManejadorAlertas.showError("Error", "Cantidad inválida", "Por favor, ingrese un número mayor a 0 en el campo de plazo para llenarlo");
                     return false;
+                }else if (Double.parseDouble(txtMonto.getText()) <= 0) {
+                    ManejadorAlertas.showError("Error", "Cantidad inválida", "Por favor, ingrese un número mayor a 0 en el campo de monto meta");
+                    return false;
                 }
             } catch (NumberFormatException e) {
                 ManejadorAlertas.showError("Error", "Cantidad inválida", "Por favor, ingrese un número válido en el campo de tasa de retorno");

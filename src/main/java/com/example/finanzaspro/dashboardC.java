@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -25,6 +26,8 @@ import java.util.ResourceBundle;
 public class dashboardC implements Initializable, paneController{
 
     private DashboardController dashboardController;
+    private ObservableList<Inversion> inversiones;
+    private static int currentIndexInversiones;
 
     @FXML
     private Label txtPresupuesto;
@@ -56,15 +59,30 @@ public class dashboardC implements Initializable, paneController{
     @FXML
     private Button btnVerInv;
 
+    @FXML
+    private Label lbTituloInversion;
+
+    @FXML
+    private Label lbPorcentajeInversion;
+
+    @FXML
+    private ProgressBar pbBarraProgreso;
+
+    @FXML
+    private Label lbMesesRestantesInversion;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        inversiones = ManejadorInversion.getInversiones();
+        currentIndexInversiones = inversiones.size() - 1;
+
         btnCompleto();
         MostrarTodosMovimientos();
         CargarIngresado();
         CargarEgresos();
         CargarPresupuesto();
         CargarRecordatorios();
-        ValidarEnviarCorreo();
+        CargarInversiones();
 
         lvListaMovimientos.setOnMouseClicked(this::listViewDoubleClick);
     }
@@ -94,6 +112,42 @@ public class dashboardC implements Initializable, paneController{
         ObservableList<Movimiento> movimientosEncontrados = BusquedaMovimientos.BuscarMovimientos("Ingreso");
 
         AsignarListaMovimientos(movimientosEncontrados);
+    }
+
+    @FXML
+    private void siguienteInversion(){
+        if (currentIndexInversiones < inversiones.size() - 1) {
+            currentIndexInversiones++;
+            mostrarInversion();
+        }
+    }
+
+    @FXML
+    private void anteriorInversion(){
+        if (currentIndexInversiones > 0) {
+            currentIndexInversiones--;
+            mostrarInversion();
+        }
+    }
+
+    private void CargarInversiones(){
+        if (inversiones.isEmpty()){
+            lbTituloInversion.setText("No hay inversiones");
+            lbPorcentajeInversion.setText("0% alcanzado");
+            pbBarraProgreso.setProgress(0);
+            lbMesesRestantesInversion.setText("No hay meses restantes");
+        }else {
+            mostrarInversion();
+        }
+    }
+
+    private void mostrarInversion(){
+        Inversion inversion = inversiones.get(currentIndexInversiones);
+        lbTituloInversion.setText(inversion.getNombre());
+        int porcentaje = (int) Math.round(inversion.getValorActual() / inversion.getMontoMeta() * 100);
+        lbPorcentajeInversion.setText(porcentaje + "% alcanzado");
+        pbBarraProgreso.setProgress(inversion.getValorActual() / inversion.getMontoMeta());
+        lbMesesRestantesInversion.setText((inversion.getPlazoMeses() - inversion.getAbonosMensuales().size()) + " meses restantes");
     }
 
     private void CargarRecordatorios(){
@@ -171,7 +225,7 @@ public class dashboardC implements Initializable, paneController{
         }
     }
 
-    private void ValidarEnviarCorreo(){
+    public void ValidarEnviarCorreo(){
         ObservableList<Movimiento> recordatorios = ManejadorMovimiento.getRecordatorios();
         boolean enviarCorreo = false;
 
@@ -201,7 +255,11 @@ public class dashboardC implements Initializable, paneController{
 
         // Enviar el correo
         SendGridEmailService emailService = new SendGridEmailService();
-        emailService.sendEmail("Recordatorios de Movimientos", cuerpoCorreo.toString());
+        try {
+            emailService.sendEmail("Recordatorios de Movimientos", cuerpoCorreo.toString());
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
     public void btnCompleto(){
         btnCompleto.setOnAction(event -> {

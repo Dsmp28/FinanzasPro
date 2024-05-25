@@ -20,6 +20,8 @@ public class HelloApplication extends Application {
 
         if (!contenidoPresupuesto.isEmpty()) {
             MostrarFormDashBoard(stage);
+            dashboardC controller = new dashboardC();
+            controller.ValidarEnviarCorreo();
         }else {
             MostrarFormLogIn(stage);
         }

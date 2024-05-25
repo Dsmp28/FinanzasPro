@@ -19,7 +19,8 @@ public class abonoController {
 
     public void setInversion(int currentIndex){
         this.currentIndex = currentIndex;
-        txtCantidad.setText(String.valueOf(ManejadorInversion.getInversiones().get(currentIndex).calcularMensualidad()));
+        double mensualidad = ManejadorInversion.getInversiones().get(currentIndex).calcularMensualidad();
+        txtCantidad.setText(String.format("%.2f", mensualidad));
     }
 
     public void setStage(Stage stage) {
