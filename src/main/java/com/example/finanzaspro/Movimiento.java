@@ -38,18 +38,6 @@ public class Movimiento {
         return fecha;
     }
 
-    public long calcularDiasRestantes() {
-        LocalDate fechaActual = LocalDate.now();
-        LocalDate fechaRegistro = this.getFecha();
-        long diasDesdeRegistro = ChronoUnit.DAYS.between(fechaRegistro, fechaActual);
-        long ciclosCompletos = diasDesdeRegistro / this.getIntervaloDias();
-
-        LocalDate fechaUltimoMovimiento = fechaRegistro.plusDays(ciclosCompletos * this.getIntervaloDias());
-        LocalDate fechaProximoMovimiento = fechaUltimoMovimiento.plusDays(this.getIntervaloDias());
-
-        return ChronoUnit.DAYS.between(fechaActual, fechaProximoMovimiento);
-    }
-
     public boolean isEsRecurrente() {
         return esRecurrente;
     }
@@ -88,6 +76,18 @@ public class Movimiento {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public long calcularDiasRestantes() {
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaRegistro = this.getFecha();
+        long diasDesdeRegistro = ChronoUnit.DAYS.between(fechaRegistro, fechaActual);
+        long ciclosCompletos = diasDesdeRegistro / this.getIntervaloDias();
+
+        LocalDate fechaUltimoMovimiento = fechaRegistro.plusDays(ciclosCompletos * this.getIntervaloDias());
+        LocalDate fechaProximoMovimiento = fechaUltimoMovimiento.plusDays(this.getIntervaloDias());
+
+        return ChronoUnit.DAYS.between(fechaActual, fechaProximoMovimiento);
     }
 }
 

@@ -59,7 +59,7 @@
             </Button>
             <HBox layoutY="23.0" prefHeight="77.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="btnAnterior" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="83.0" prefWidth="22.0" styleClass="btnTransp">
+                  <Button fx:id="btnAnterior" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#anteriorInversion" prefHeight="83.0" prefWidth="22.0" styleClass="btnTransp">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -82,16 +82,16 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="127.0">
                      <children>
-                        <Label fx:id="lbTitulo" styleClass="txtTitInv" text="Título" />
-                        <Label fx:id="lbPorcentaje" styleClass="txtPorcentaje" text="100% alcanzado" />
-                        <ProgressBar prefWidth="200.0" progress="0.22" />
-                        <Label fx:id="lbRestante" styleClass="txtInvTxt" text="11 meses restantes" />
+                        <Label fx:id="lbTituloInversion" styleClass="txtTitInv" text="Título" />
+                        <Label fx:id="lbPorcentajeInversion" styleClass="txtPorcentaje" text="100% alcanzado" />
+                        <ProgressBar fx:id="pbBarraProgreso" prefWidth="200.0" progress="0.22" />
+                        <Label fx:id="lbMesesRestantesInversion" styleClass="txtInvTxt" text="11 meses restantes" />
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" />
                      </padding>
                   </VBox>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="83.0" prefWidth="22.0" styleClass="btnTransp">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#siguienteInversion" prefHeight="83.0" prefWidth="22.0" styleClass="btnTransp">
                      <graphic>
                         <ImageView fx:id="btnSiguiente" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
