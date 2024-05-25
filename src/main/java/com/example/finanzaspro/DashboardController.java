@@ -33,6 +33,9 @@ public class DashboardController implements Initializable {
         private Button btnInversion;
 
         @FXML
+        private Button btnEstadistica;
+
+        @FXML
         private StackPane contentArea;
 
     @Override
@@ -49,6 +52,7 @@ public class DashboardController implements Initializable {
         btnInicio.setStyle("-fx-text-fill: #55595f");
         btnRegistrar.setStyle("-fx-text-fill: #55595f");
         btnTransaccion.setStyle("-fx-text-fill: #55595f");
+        btnEstadistica.setStyle("-fx-text-fill: #55595f");
         btnInversion.setStyle("-fx-text-fill: #55595f");
     }
     private void cargarFxml(String fxml){
@@ -83,6 +87,11 @@ public class DashboardController implements Initializable {
     public void btnInversion(){
         btnInversion.setOnAction(event -> {
             botonActivo(btnInversion, "inversion-view.fxml");
+        });
+    }
+    public void btnEstadistica(){
+        btnEstadistica.setOnAction(event -> {
+            botonActivo(btnEstadistica, "estadisticas-view.fxml");
         });
     }
     public void btnSalir(){
