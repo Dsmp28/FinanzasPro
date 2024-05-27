@@ -38,6 +38,10 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         String css = this.getClass().getResource("style.css").toExternalForm();
         scene.getStylesheets().add(css);
+        stage.getIcons().add(new Image(getClass().getResource("icons/finanzas.png").toString()));
+        stage.initStyle(javafx.stage.StageStyle.DECORATED);
+        stage.setResizable(false);
+        stage.setMaximized(false);
         stage.show();
     }
 
@@ -48,6 +52,10 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         String css = this.getClass().getResource("styledashboard.css").toExternalForm();
         scene.getStylesheets().add(css);
+        stage.getIcons().add(new Image(getClass().getResource("icons/finanzas.png").toString()));
+        stage.initStyle(javafx.stage.StageStyle.DECORATED);
+        stage.setResizable(false);
+        stage.setMaximized(false);
         stage.show();
     }
 }

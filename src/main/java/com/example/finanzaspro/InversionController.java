@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
@@ -82,7 +83,10 @@ public class InversionController implements Initializable {
             Stage emergente = new Stage();
 
             emergente.initModality(Modality.APPLICATION_MODAL);
-            emergente.initStyle(javafx.stage.StageStyle.UTILITY);
+            emergente.getIcons().add(new Image(getClass().getResource("icons/finanzas.png").toString()));
+            emergente.initStyle(javafx.stage.StageStyle.DECORATED);
+            emergente.setResizable(false);
+            emergente.setMaximized(false);
             emergente.setTitle("Abonar a Inversión");
             emergente.setScene(new Scene(root));
             abonoController controller = loader.getController();
@@ -104,7 +108,10 @@ public class InversionController implements Initializable {
             Stage emergente = new Stage();
 
             emergente.initModality(Modality.APPLICATION_MODAL);
-            emergente.initStyle(javafx.stage.StageStyle.UTILITY);
+            emergente.getIcons().add(new Image(getClass().getResource("icons/finanzas.png").toString()));
+            emergente.initStyle(javafx.stage.StageStyle.DECORATED);
+            emergente.setResizable(false);
+            emergente.setMaximized(false);
             emergente.setTitle("Agregar nueva Inversión");
             emergente.setScene(new Scene(root));
             nuevaInvController controller = loader.getController();

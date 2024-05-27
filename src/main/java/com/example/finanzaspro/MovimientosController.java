@@ -112,7 +112,10 @@ public class MovimientosController implements Initializable, paneController{
             Stage emergente = new Stage();
 
             emergente.initModality(Modality.APPLICATION_MODAL);
-            emergente.initStyle(javafx.stage.StageStyle.UTILITY);
+            emergente.getIcons().add(new Image(getClass().getResource("icons/finanzas.png").toString()));
+            emergente.initStyle(javafx.stage.StageStyle.DECORATED);
+            emergente.setResizable(false);
+            emergente.setMaximized(false);
             emergente.setTitle("Editar movimiento");
             emergente.setScene(new Scene(root));
             editarController controller = loader.getController();
