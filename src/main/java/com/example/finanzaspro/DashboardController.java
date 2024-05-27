@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -34,6 +35,8 @@ public class DashboardController implements Initializable {
 
         @FXML
         private Button btnEstadistica;
+        @FXML
+        private Button btnConfiguracion;
 
         @FXML
         private StackPane contentArea;
@@ -94,6 +97,18 @@ public class DashboardController implements Initializable {
             botonActivo(btnEstadistica, "estadisticas-view.fxml");
         });
     }
+    public void btnConfiguracion(){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Configuración");
+        dialog.setHeaderText("Cambiar email");
+        dialog.setContentText("Ingrese su nuevo email:");
+        dialog.setGraphic(null);
+        dialog.getDialogPane().getStylesheets().add(getClass().getResource("cssestadisticas.css").toExternalForm());
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(email -> {
+            //código para cambiar email xd
+        });
+    }
     public void btnSalir(){
         btnSalir.setOnAction(event -> {
             salir();
@@ -103,12 +118,15 @@ public class DashboardController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Salir");
         alert.setHeaderText("¿Estás seguro de que deseas salir?");
+        alert.setGraphic(null);
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("cssestadisticas.css").toExternalForm());
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK){
             Stage stage = (Stage) btnSalir.getScene().getWindow();
             stage.close();
         }
     }
+
     public void cambiarVista(String fxml, Button activo){
         botonActivo(activo, fxml);
     }

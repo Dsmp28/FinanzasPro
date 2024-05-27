@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<Pane prefHeight="550.0" prefWidth="750.0" stylesheets="@styleregistro.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finanzaspro.RegistroController">
+<Pane prefHeight="490.0" prefWidth="750.0" stylesheets="@styleregistro.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finanzaspro.RegistroController">
    <children>
       <Label layoutX="33.0" layoutY="33.0" styleClass="txtTituloDash" text="Registrar Movimiento" />
       <Label layoutX="33.0" layoutY="83.0" prefHeight="20.0" prefWidth="222.0" styleClass="txtsubTituloDash" text="Seleccione el tipo de movimiento" />
@@ -60,8 +60,6 @@
                   </VBox>
                </children>
             </HBox>
-            <Label styleClass="txtTituloCampo" text="Otros datos" />
-            <TextField fx:id="txtDescripcion" prefHeight="30.0" prefWidth="223.0" promptText="Descripción" styleClass="textBoxCampo" />
             <Button fx:id="btnIngreso" alignment="CENTER" mnemonicParsing="false" onAction="#AgregarMovimiento" prefHeight="27.0" prefWidth="435.0" styleClass="btnIngreso" text="Continuar" textAlignment="RIGHT">
                <VBox.margin>
                   <Insets top="10.0" />
