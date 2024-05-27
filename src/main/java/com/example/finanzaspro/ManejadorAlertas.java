@@ -31,6 +31,9 @@ public class ManejadorAlertas {
             alert.setHeaderText(header);
             alert.setContentText(content);
 
+            alert.setGraphic(null);
+            alert.getDialogPane().getStylesheets().add(ManejadorAlertas.class.getResource("cssestadisticas.css").toExternalForm());
+
             // Obtener el stage principal si es necesario para aplicaciones que usen múltiples stages
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
             stage.toFront(); // Llevar la ventana de alerta al frente

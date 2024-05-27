@@ -33,13 +33,13 @@ public class RecordatorioCell extends ListCell<Movimiento> {
         diasRestantes.setStyle("-fx-fill: '#55595f'; -fx-font-size: 10px");
 
         HBox hBox = new HBox(titulo, cantidad, diasRestantes);
-        hBox.setSpacing(10);
+        hBox.setSpacing(35);
         hBox.setAlignment(Pos.CENTER_RIGHT);
 
         content = new HBox(imagen, hBox);
         content.setSpacing(10);
         content.setPadding(new javafx.geometry.Insets(5));
-        content.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+        content.setAlignment(Pos.CENTER_LEFT);
     }
 
     @Override
