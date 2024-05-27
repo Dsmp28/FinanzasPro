@@ -13,10 +13,10 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="33.0" layoutY="291.0" styleClass="txtTituloGrafica" text="Gráfica 1" />
-      <Pane layoutX="33.0" layoutY="313.0" prefHeight="215.0" prefWidth="329.0" styleClass="paneG1">
+      <Label layoutX="33.0" layoutY="263.0" styleClass="txtTituloGrafica" text="Gráfica 1" />
+      <Pane layoutX="33.0" layoutY="288.0" prefHeight="240.0" prefWidth="329.0" styleClass="paneG1">
          <children>
-            <ScatterChart fx:id="chartDispersion" layoutY="8.0" prefHeight="208.0" prefWidth="329.0">
+            <ScatterChart fx:id="chartDispersion" legendSide="RIGHT" prefHeight="248.0" prefWidth="329.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -26,10 +26,10 @@
             </ScatterChart>
          </children>
       </Pane>
-      <Label layoutX="375.0" layoutY="291.0" styleClass="txtTituloGrafica" text="Gráfica 2" />
-      <Pane layoutX="375.0" layoutY="313.0" prefHeight="215.0" prefWidth="335.0" styleClass="paneG2">
+      <Label layoutX="375.0" layoutY="263.0" styleClass="txtTituloGrafica" text="Gráfica 2" />
+      <Pane layoutX="375.0" layoutY="288.0" prefHeight="240.0" prefWidth="335.0" styleClass="paneG2">
          <children>
-            <BarChart fx:id="chartBarras" prefHeight="215.0" prefWidth="335.0">
+            <BarChart fx:id="chartBarras" legendSide="RIGHT" prefHeight="240.0" prefWidth="335.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>

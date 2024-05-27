@@ -9,6 +9,7 @@ module com.example.finanzaspro {
     requires java.http.client;
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
+    requires java.desktop;
 
     opens com.example.finanzaspro to javafx.fxml;
     exports com.example.finanzaspro;

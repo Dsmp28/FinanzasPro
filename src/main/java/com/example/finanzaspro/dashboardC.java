@@ -269,7 +269,7 @@ public class dashboardC implements Initializable, paneController{
 
         for (Movimiento movimiento : recordatorios) {
             long diasRestantes = movimiento.calcularDiasRestantes();
-            if (diasRestantes < 3) {
+            if (diasRestantes < 4) {
                 enviarCorreo = true;
                 break;
             }
@@ -281,7 +281,10 @@ public class dashboardC implements Initializable, paneController{
     }
 
     private void enviarRecordatoriosPorCorreo(ObservableList<Movimiento> recordatorios) {
-        StringBuilder cuerpoCorreo = new StringBuilder("Movimientos que faltan menos de 3 días para suceder:\n\n");
+        StringBuilder cuerpoCorreo = new StringBuilder();
+        cuerpoCorreo.append("Estimado/a,\n\n ");
+        cuerpoCorreo.append("Esperamos que esté teniendo un excelente día.\n\n");
+        cuerpoCorreo.append("Le recordamos que tiene los siguientes movimientos a menos de 4 dias de suceder:\n\n");
 
         for (Movimiento movimiento : recordatorios) {
             long diasRestantes = movimiento.calcularDiasRestantes();
@@ -294,7 +297,7 @@ public class dashboardC implements Initializable, paneController{
         // Enviar el correo
         SendGridEmailService emailService = new SendGridEmailService();
         try {
-            emailService.sendEmail("Recordatorios de Movimientos", cuerpoCorreo.toString());
+            emailService.sendEmail("Recordatorio de Movimientos programados", cuerpoCorreo.toString());
         } catch (Exception e) {
             e.getMessage();
         }

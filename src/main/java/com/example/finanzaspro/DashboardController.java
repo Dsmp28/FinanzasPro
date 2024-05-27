@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DashboardController implements Initializable {
 
@@ -101,14 +103,33 @@ public class DashboardController implements Initializable {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Configuración");
         dialog.setHeaderText("Cambiar email");
-        dialog.setContentText("Ingrese su nuevo email:");
+        dialog.setContentText("Escriba el email nuevo o actualice el anterior:");
+        dialog.getEditor().setText(ManejadorEncriptacion.leerCorreoDeJSON("DatoCorreo.json"));
         dialog.setGraphic(null);
         dialog.getDialogPane().getStylesheets().add(getClass().getResource("cssestadisticas.css").toExternalForm());
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(email -> {
-            //código para cambiar email xd
+            if (!email.isEmpty()){
+                if (esCorreoValido(email)) {
+                    ManejadorEncriptacion.guardarCorreoEnJSON(email, "DatoCorreo.json");
+                    ManejadorAlertas.showInformation("Éxito", "Email guardado", "El email se ha guardado correctamente");
+                }else {
+                    ManejadorAlertas.showError("Error", "Email inválido", "Por favor, ingrese un email válido");
+                }
+            }else {
+                ManejadorAlertas.showError("Error", "Campo vacio", "Por favor, llene el campo de texto");
+            }
         });
     }
+
+    private boolean esCorreoValido(String correo) {
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(correo);
+        return matcher.matches();
+    }
+
+
     public void btnSalir(){
         btnSalir.setOnAction(event -> {
             salir();
