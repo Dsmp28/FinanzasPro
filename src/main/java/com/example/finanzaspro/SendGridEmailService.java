@@ -24,7 +24,7 @@ public class SendGridEmailService {
     }
 
     public void sendEmail(String subject, String body) {
-        String fromEmail = "finanzaspro01@outlook.com";
+        String fromEmail = ManejadorEncriptacion.leerCorreoDeJSON("DatoCorreoFrom.json");
         String toEmail = ManejadorEncriptacion.leerCorreoDeJSON("DatoCorreo.json");
 
         // Crear el cuerpo del correo electrónico en formato JSON
