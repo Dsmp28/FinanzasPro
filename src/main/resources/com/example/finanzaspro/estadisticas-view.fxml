@@ -16,7 +16,7 @@
       <Label layoutX="33.0" layoutY="291.0" styleClass="txtTituloGrafica" text="Gráfica 1" />
       <Pane layoutX="33.0" layoutY="313.0" prefHeight="215.0" prefWidth="329.0" styleClass="paneG1">
          <children>
-            <ScatterChart fx:id="chartDispersion" layoutY="8.0" prefHeight="208.0" prefWidth="329.0">
+            <ScatterChart fx:id="chartDispersion" layoutY="8.0" legendSide="RIGHT" prefHeight="208.0" prefWidth="329.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>

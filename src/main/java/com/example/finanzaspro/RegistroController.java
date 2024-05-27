@@ -102,6 +102,7 @@ public class RegistroController implements Initializable {
 
                 ManejadorMovimiento.agregarMovimiento(categoriaSeleccionada, tipo, titulo, cantidad, fecha, esRecurrente, intervaloDias);
                 ManejadorAlertas.showInformation("Movimiento agregado", "Movimiento agregado exitosamente", "El movimiento ha sido agregado exitosamente");
+                limpiarCampos();
             }catch (Exception e){
                 ManejadorAlertas.showError("Error", "Error al agregar movimiento", e.getMessage());
             }
@@ -149,5 +150,16 @@ public class RegistroController implements Initializable {
             }
         }
         return true;
+    }
+
+    private void limpiarCampos(){
+        txtTitulo.setText("");
+        txtCantidad.setText("");
+        dpFecha.setValue(null);
+        cbCategoria.getSelectionModel().clearSelection();
+        cbMovimiento.setValue("Ingreso");
+        cbRecurrente.setSelected(false);
+        txtDias.setText("");
+        txtSubcategoria.setText("");
     }
 }

@@ -145,7 +145,7 @@ public class SendGridEmailService {
         }
     }
 
-    private String convertMovimientosToCsv(ObservableList<Movimiento> movimientos) {
+    public String convertMovimientosToCsv(ObservableList<Movimiento> movimientos) {
         String csvPath = "movimientos.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvPath))) {
             // Write the header
