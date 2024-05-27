@@ -1,16 +1,14 @@
 package com.example.finanzaspro;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Base64;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -100,14 +98,8 @@ public class SendGridEmailService {
         emailJson.putArray("content").add(contentNode);
 
         // Convert ObservableList<Movimiento> to CSV and encode it to base64
-        String csvPath = convertMovimientosToCsv(movimientos);
-        byte[] csvData;
-        try {
-            csvData = Files.readAllBytes(Paths.get(csvPath));
-        } catch (IOException e) {
-            throw new RuntimeException("Error reading CSV file", e);
-        }
-        String encodedCsv = Base64.getEncoder().encodeToString(csvData);
+        String csvData = convertMovimientosToCsv(movimientos);
+        String encodedCsv = Base64.getEncoder().encodeToString(csvData.getBytes());
 
         // Create the CSV attachment node
         ObjectNode csvAttachmentNode = objectMapper.createObjectNode();
@@ -146,19 +138,19 @@ public class SendGridEmailService {
     }
 
     public String convertMovimientosToCsv(ObservableList<Movimiento> movimientos) {
-        String csvPath = "movimientos.csv";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvPath))) {
+        StringWriter writer = new StringWriter();
+        try (BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
             // Write the header
-            writer.write("Categoria,tipo,titulo,cantidad,fecha,Es recurrente,intervalo dias");
-            writer.newLine();
+            bufferedWriter.write("Categoria,tipo,titulo,cantidad,fecha,Es recurrente,intervalo dias");
+            bufferedWriter.newLine();
 
             // Write the data
             for (Movimiento movimiento : movimientos) {
                 double cantidad = movimiento.getCantidad();
-                if (movimiento.getTipo().equals("Egreso")){
+                if (movimiento.getTipo().equals("Egreso")) {
                     cantidad = cantidad * -1;
                 }
-                writer.write(String.format("%s,%s,%s,%f,%s,%b,%s",
+                bufferedWriter.write(String.format("%s,%s,%s,%f,%s,%b,%s",
                         movimiento.getCategoria().getTitulo(),
                         movimiento.getTipo(),
                         movimiento.getTitulo(),
@@ -166,12 +158,12 @@ public class SendGridEmailService {
                         movimiento.getFecha().toString(),
                         movimiento.isEsRecurrente(),
                         movimiento.getIntervaloDias()));
-                writer.newLine();
+                bufferedWriter.newLine();
             }
         } catch (IOException e) {
             throw new RuntimeException("Error converting ObservableList<Movimiento> to CSV", e);
         }
-        return csvPath;
+        return writer.toString();
     }
 }
 

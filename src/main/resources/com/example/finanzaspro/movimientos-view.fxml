@@ -20,9 +20,9 @@
          </graphic>
       </Button>
       <Label layoutX="33.0" layoutY="149.0" styleClass="txtTituloCat" text="Categorías" />
-      <ListView fx:id="lvCategorias" layoutX="33.0" layoutY="174.0" prefHeight="232.0" prefWidth="188.0" styleClass="menuPrincipal" />
+      <ListView fx:id="lvCategorias" layoutX="33.0" layoutY="174.0" onMouseClicked="#BuscarMovimientos" prefHeight="232.0" prefWidth="188.0" styleClass="menuPrincipal" />
       <Label layoutX="33.0" layoutY="413.0" styleClass="txtTituloCat" text="Tipo de Movimiento" />
-      <ComboBox fx:id="cbMovimiento" layoutX="33.0" layoutY="444.0" prefHeight="27.0" prefWidth="165.0" styleClass="cbMovimiento" />
+      <ComboBox fx:id="cbMovimiento" layoutX="33.0" layoutY="444.0" onAction="#BuscarMovimientos" prefHeight="27.0" prefWidth="165.0" styleClass="cbMovimiento" />
       <Label layoutX="33.0" layoutY="70.0" styleClass="txtTituloCat" text="Buscar por título" />
       <Label layoutX="33.0" layoutY="95.0" styleClass="txtDescr" text="Si no desea buscar un título, dejar en blanco." />
    </children>

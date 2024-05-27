@@ -6,19 +6,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.TriangleMesh;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javax.swing.plaf.synth.Region;
 import java.awt.*;
@@ -54,8 +55,9 @@ public class estadisticasController implements Initializable {
         cargarDatosEnScatterChart();
         cargarDatosEnBarChart();
     }
+
     @FXML
-    public void handleExportar(ActionEvent event){
+    public void handleExportar(ActionEvent event) {
         List<String> choices = List.of("Descargar", "Enviar por correo");
         ChoiceDialog<String> dialog = new ChoiceDialog<>("Descargar", choices);
         dialog.setTitle("Exportar Datos");
@@ -71,7 +73,12 @@ public class estadisticasController implements Initializable {
             if (selected.equals("Descargar")) {
                 guardarCsvEnRutaSeleccionada();
             } else {
-                //código de enviar por correo
+                SendGridEmailService emailService = new SendGridEmailService();
+
+                StringBuilder message = new StringBuilder();
+                message.append("Estimado/a,\n\n");
+                message.append("Nos complace presentarle sus estadísticas financieras más recientes:");
+                emailService.sendEmailWithAttachment("Estadísticas de movimientos", message.toString(), movimientos);
             }
         });
     }
@@ -93,19 +100,20 @@ public class estadisticasController implements Initializable {
             SendGridEmailService emailService = new SendGridEmailService();
 
             // Generar el archivo CSV
-            String csvPath = emailService.convertMovimientosToCsv(movimientos);
+            String csvContent = emailService.convertMovimientosToCsv(movimientos);
 
             try {
-                // Mover el archivo CSV a la ubicación seleccionada
-                Files.move(Paths.get(csvPath), file.toPath());
+                // Escribir el contenido del CSV en el archivo seleccionado
+                Files.write(file.toPath(), csvContent.getBytes());
+                ManejadorAlertas.showConfirmation("Exportacion de archivos", "Archivo guardado con exito", "El archivo CSV se ha guardado correctamente en la ruta seleccionada.");
             } catch (IOException e) {
                 // Manejar la excepción
-                System.err.println("Error al mover el archivo CSV: " + e.getMessage());
+                System.err.println("Error al escribir el archivo CSV: " + e.getMessage());
             }
         }
     }
 
-    private void CargarTabla(){
+    private void CargarTabla() {
         // Crear las columnas
         TableColumn<Movimiento, String> categoriaColumn = new TableColumn<>("Categoría");
         categoriaColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategoria().getTitulo()));
@@ -125,11 +133,11 @@ public class estadisticasController implements Initializable {
             return new SimpleObjectProperty<>(cantidad);
         });
 
-        TableColumn<Movimiento, LocalDate> fechaColumn = new TableColumn<>("Fecha");
-        fechaColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getFecha()));
+        TableColumn<Movimiento, String> fechaColumn = new TableColumn<>("Fecha");
+        fechaColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getFecha().format(DateTimeFormatter.ofPattern("dd-MM-yy"))));
 
-        TableColumn<Movimiento, Boolean> esRecurrenteColumn = new TableColumn<>("Es Recurrente");
-        esRecurrenteColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isEsRecurrente()));
+        TableColumn<Movimiento, String> esRecurrenteColumn = new TableColumn<>("Es Recurrente");
+        esRecurrenteColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().isEsRecurrente() ? "Sí" : "No"));
 
         TableColumn<Movimiento, Integer> intervaloDiasColumn = new TableColumn<>("Intervalo de Días");
         intervaloDiasColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getIntervaloDias()));
@@ -145,7 +153,6 @@ public class estadisticasController implements Initializable {
 
         tvDatos.setItems(movimientos);
     }
-
 
 
     public void cargarDatosEnScatterChart() {
@@ -236,27 +243,63 @@ public class estadisticasController implements Initializable {
         seriesGastos.setName("Gastos");
         XYChart.Series<String, Number> seriesIngresos = new XYChart.Series<>();
         seriesIngresos.setName("Ingresos");
+        XYChart.Series<String, Number> seriesTotal = new XYChart.Series<>();
+        seriesTotal.setName("Total");
 
         // Agrupar los movimientos por categoría y tipo
         Map<String, Double> gastosPorCategoria = new HashMap<>();
         Map<String, Double> ingresosPorCategoria = new HashMap<>();
+        Map<String, Double> totalPorCategoria = new HashMap<>();
         for (Movimiento movimiento : movimientos) {
             if (movimiento.getTipo().equals("Egreso")) {
-                gastosPorCategoria.merge(movimiento.getCategoria().getTitulo(), movimiento.getCantidad(), Double::sum);
+                double cantidad = movimiento.getCantidad();
+                gastosPorCategoria.merge(movimiento.getCategoria().getTitulo(), cantidad, Double::sum);
+                totalPorCategoria.merge(movimiento.getCategoria().getTitulo(), cantidad, Double::sum); // Gasto en valor negativo
             } else if (movimiento.getTipo().equals("Ingreso")) {
-                ingresosPorCategoria.merge(movimiento.getCategoria().getTitulo(), movimiento.getCantidad(), Double::sum);
+                double cantidad = movimiento.getCantidad();
+                ingresosPorCategoria.merge(movimiento.getCategoria().getTitulo(), cantidad, Double::sum);
+                totalPorCategoria.merge(movimiento.getCategoria().getTitulo(), cantidad, Double::sum);
             }
         }
 
         // Agregar los datos a las series
         for (Map.Entry<String, Double> entry : gastosPorCategoria.entrySet()) {
-            seriesGastos.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+            XYChart.Data<String, Number> data = new XYChart.Data<>(entry.getKey(), entry.getValue());
+            data.nodeProperty().addListener((ov, oldNode, newNode) -> {
+                if (newNode != null) {
+                    instalarTooltipEnNodo(newNode, data.getXValue(), data.getYValue());
+                }
+            });
+            seriesGastos.getData().add(data);
         }
         for (Map.Entry<String, Double> entry : ingresosPorCategoria.entrySet()) {
-            seriesIngresos.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+            XYChart.Data<String, Number> data = new XYChart.Data<>(entry.getKey(), entry.getValue());
+            data.nodeProperty().addListener((ov, oldNode, newNode) -> {
+                if (newNode != null) {
+                    instalarTooltipEnNodo(newNode, data.getXValue(), data.getYValue());
+                }
+            });
+            seriesIngresos.getData().add(data);
+        }
+        for (Map.Entry<String, Double> entry : totalPorCategoria.entrySet()) {
+            XYChart.Data<String, Number> data = new XYChart.Data<>(entry.getKey(), entry.getValue());
+            data.nodeProperty().addListener((ov, oldNode, newNode) -> {
+                if (newNode != null) {
+                    instalarTooltipEnNodo(newNode, data.getXValue(), data.getYValue());
+                }
+            });
+            seriesTotal.getData().add(data);
         }
 
         chartBarras.getData().add(seriesGastos);
         chartBarras.getData().add(seriesIngresos);
+        chartBarras.getData().add(seriesTotal);
+    }
+
+    private void instalarTooltipEnNodo(Node nodo, String xValue, Number yValue) {
+        Tooltip tooltip = new Tooltip("Categoría: " + xValue + "\nTotal: " + yValue);
+        tooltip.setShowDelay(Duration.seconds(0.1)); // Mostrar el Tooltip después de 0.1 segundos
+        tooltip.setStyle("-fx-font-size: 13px;"); // Aplicar la clase de estilo al Tooltip
+        Tooltip.install(nodo, tooltip);
     }
 }
