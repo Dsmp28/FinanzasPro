@@ -9,23 +9,14 @@
       <Button fx:id="btnExportar" layoutX="623.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleExportar" prefHeight="30.0" prefWidth="90.0" styleClass="btnExportar" text="Exportar" />
       <Label layoutX="33.0" layoutY="33.0" styleClass="txtTitulo" text="Estadísticas" />
       <TableView fx:id="tvDatos" layoutX="33.0" layoutY="75.0" prefHeight="176.0" prefWidth="680.0" styleClass="menuPrincipal">
-        <columns>
-          <TableColumn prefWidth="97.0" resizable="false" text="Categoría" />
-          <TableColumn prefWidth="93.5999755859375" resizable="false" text="Tipo" />
-            <TableColumn prefWidth="101.60005187988281" resizable="false" text="Título" />
-            <TableColumn prefWidth="97.0" resizable="false" text="Cantidad (Q)" />
-            <TableColumn prefWidth="94.39996337890625" resizable="false" text="Fecha" />
-            <TableColumn prefWidth="96.0" resizable="false" text="¿Recurrente?" />
-            <TableColumn prefWidth="103.199951171875" resizable="false" text="Intervalo días" />
-        </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="33.0" layoutY="303.0" styleClass="txtTituloGrafica" text="Gráfica 1" />
-      <Pane layoutX="33.0" layoutY="328.0" prefHeight="200.0" prefWidth="329.0" styleClass="paneG1">
+      <Label layoutX="33.0" layoutY="291.0" styleClass="txtTituloGrafica" text="Gráfica 1" />
+      <Pane layoutX="33.0" layoutY="313.0" prefHeight="215.0" prefWidth="329.0" styleClass="paneG1">
          <children>
-            <ScatterChart fx:id="chartDispersion" prefHeight="200.0" prefWidth="329.0">
+            <ScatterChart fx:id="chartDispersion" layoutY="8.0" prefHeight="208.0" prefWidth="329.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -35,10 +26,10 @@
             </ScatterChart>
          </children>
       </Pane>
-      <Label layoutX="375.0" layoutY="303.0" styleClass="txtTituloGrafica" text="Gráfica 2" />
-      <Pane layoutX="375.0" layoutY="328.0" prefHeight="200.0" prefWidth="335.0" styleClass="paneG2">
+      <Label layoutX="375.0" layoutY="291.0" styleClass="txtTituloGrafica" text="Gráfica 2" />
+      <Pane layoutX="375.0" layoutY="313.0" prefHeight="215.0" prefWidth="335.0" styleClass="paneG2">
          <children>
-            <BarChart fx:id="chartBarras" prefHeight="200.0" prefWidth="335.0">
+            <BarChart fx:id="chartBarras" prefHeight="215.0" prefWidth="335.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>

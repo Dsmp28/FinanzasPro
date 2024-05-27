@@ -2,7 +2,7 @@ package com.example.finanzaspro;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.image.Image;
+
 import java.time.LocalDate;
 
 public class ManejadorMovimiento {

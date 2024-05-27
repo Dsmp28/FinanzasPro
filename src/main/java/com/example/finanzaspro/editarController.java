@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 
 public class editarController {
+    private dashboardC dashboardController;
+
     @FXML
     private ChoiceBox<String> cbMovimiento;
 
@@ -104,6 +106,7 @@ public class editarController {
                     ManejadorCategoria.agregarCategoria(tituloNuevaCategoria);
                     categoriaSeleccionada = ManejadorCategoria.buscarCategoriaPorTitulo(tituloNuevaCategoria);
                 }
+
                 String tipo = cbMovimiento.getValue();
                 String titulo = txtTitulo.getText();
 
@@ -131,6 +134,7 @@ public class editarController {
                 movimiento.setEsRecurrente(esRecurrente);
                 movimiento.setIntervaloDias(intervaloDias);
                 movimiento.setFecha(fecha);
+
 
                 ManejadorEncriptacion.guardarMovimientosEnJSON(ManejadorMovimiento.getMovimientos(), "DatosMovimientos.json");
                 ManejadorIngreso.getInstancia().actualizarIngresos();
