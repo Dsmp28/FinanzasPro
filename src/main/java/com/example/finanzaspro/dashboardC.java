@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -20,9 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class dashboardC implements Initializable, paneController{
 
@@ -72,6 +71,9 @@ public class dashboardC implements Initializable, paneController{
     @FXML
     private Label lbMesesRestantesInversion;
 
+    @FXML
+    public PieChart pieGastos;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inversiones = ManejadorInversion.getInversiones();
@@ -84,6 +86,7 @@ public class dashboardC implements Initializable, paneController{
         CargarPresupuesto();
         CargarRecordatorios();
         CargarInversiones();
+        mostrarGastosPorCategoria();
 
         lvListaMovimientos.setOnMouseClicked(this::listViewDoubleClick);
     }
@@ -105,7 +108,37 @@ public class dashboardC implements Initializable, paneController{
         AsignarListaMovimientos(movimientosEncontrados);
     }
 
-    @FXML
+    public void mostrarGastosPorCategoria() {
+        ObservableList<Movimiento> movimientos = ManejadorMovimiento.getMovimientos();
+        // Crear un mapa para almacenar la suma de gastos por categoría
+        Map<String, Double> gastosPorCategoria = new HashMap<>();
+
+        // Recorrer los movimientos y sumar los gastos por categoría
+        for (Movimiento movimiento : movimientos) {
+            if (movimiento.getTipo().equals("Egreso")) {
+                String categoria = movimiento.getCategoria().getTitulo();
+                double cantidad = movimiento.getCantidad() * -1;
+                gastosPorCategoria.put(categoria, gastosPorCategoria.getOrDefault(categoria, 0.0) + cantidad);
+            }
+        }
+
+        // Crear los datos para el PieChart
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+        for (Map.Entry<String, Double> entry : gastosPorCategoria.entrySet()) {
+            pieChartData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
+        }
+
+        if (pieChartData.isEmpty()) {
+            pieChartData.add(new PieChart.Data("No hay gastos", 1));
+        }
+
+        // Configurar y mostrar el PieChart
+        pieGastos.setData(pieChartData);
+        pieGastos.setLabelsVisible(false);
+    }
+
+        @FXML
     public void MostrarIngresos(){
         botonActivo(btnIngresos);
         BusquedaMovimientos BusquedaMovimientos = new BusquedaMovimientos();
@@ -223,6 +256,7 @@ public class dashboardC implements Initializable, paneController{
             CargarEgresos();
             CargarPresupuesto();
             CargarRecordatorios();
+            mostrarGastosPorCategoria();
 
         }catch (IOException e){
             e.printStackTrace();
