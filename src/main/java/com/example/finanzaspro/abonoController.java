@@ -49,8 +49,8 @@ public class abonoController {
         }else{
             try {
                 double cantidad = Double.parseDouble(txtCantidad.getText());
-                if(cantidad <= 0){
-                    ManejadorAlertas.showError("Error", "Cantidad invalida", "Por favor ingrese una cantidad mayor a 0");
+                if(cantidad <= 0 || cantidad > 999999999999999.0){
+                    ManejadorAlertas.showError("Error", "Cantidad invalida", "Por favor ingrese una cantidad mayor a 0 y menor a 999,999,999,999,999");
                     return false;
                 }
             } catch (NumberFormatException e) {

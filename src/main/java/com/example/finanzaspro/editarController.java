@@ -168,8 +168,8 @@ public class editarController {
             return false;
         }else {
             try {
-                if (Double.parseDouble(txtCantidad.getText()) <= 0){
-                    ManejadorAlertas.showError("Error", "Cantidad inválida", "Por favor, ingrese un número mayor a 0 en el campo de cantidad");
+                if (Double.parseDouble(txtCantidad.getText()) <= 0 || Double.parseDouble(txtCantidad.getText()) > 999999999999999.0){
+                    ManejadorAlertas.showError("Error", "Cantidad inválida", "Por favor, ingrese un número mayor a 0 y menor a 999,999,999,999,999 en el campo de cantidad");
                     return false;
                 }
             } catch (NumberFormatException e) {

@@ -32,11 +32,15 @@ public class InicioController {
                 if (monto <= 0) {
                     ManejadorAlertas.showError("Error", "Presupuesto inválido", "El presupuesto debe ser mayor a 0");
                 }else {
-                    ManejadorEncriptacion.guardarPresupuestoEnJSON(monto, "DatoPresupuesto.json");
-                    ManejadorEncriptacion.guardarPresupuestoEnJSON(monto, "PresupuestoOriginal.json");
-                    ManejadorEncriptacion.guardarCorreoEnJSON(correo, "DatoCorreo.json");
-                    ManejadorAlertas.showInformation("Éxito", "Presupuesto guardado", "El presupuesto se ha guardado correctamente");
-                    abrirDashboard();
+                    if (monto > 999999999999999.0){
+                        ManejadorAlertas.showError("Error", "Presupuesto inválido", "El presupuesto debe ser menor a 999999999999999");
+                    }else {
+                        ManejadorEncriptacion.guardarPresupuestoEnJSON(monto, "DatoPresupuesto.json");
+                        ManejadorEncriptacion.guardarPresupuestoEnJSON(monto, "PresupuestoOriginal.json");
+                        ManejadorEncriptacion.guardarCorreoEnJSON(correo, "DatoCorreo.json");
+                        ManejadorAlertas.showInformation("Éxito", "Presupuesto guardado", "El presupuesto se ha guardado correctamente");
+                        abrirDashboard();
+                    }
                 }
             } catch (NumberFormatException e) {
                 ManejadorAlertas.showError("Error", "Presupuesto inválido", "El presupuesto debe ser un número válido");
