@@ -5,7 +5,7 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 
 public class Categoria {
-    private static int ultimoId = 0;
+    private static int ultimoId = ManejadorEncriptacion.leerCategoriasDeJSON("DatosCategorias.json").size();
     private int id;
     private StringProperty titulo;
     private Image imagen;

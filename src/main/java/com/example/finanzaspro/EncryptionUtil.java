@@ -35,7 +35,7 @@ public class EncryptionUtil {
         try {
             String original = "dsmonjep@gmail.com";
             String encrypted = encrypt(original);
-            String decrypted = decrypt(encrypted);
+            String decrypted = decrypt("+8wv+uIZCe3GrKrwf99F+Q\u003d\u003d");
             System.out.println("Original: " + original);
             System.out.println("Encrypted: " + encrypted);
             System.out.println("Decrypted: " + decrypted);

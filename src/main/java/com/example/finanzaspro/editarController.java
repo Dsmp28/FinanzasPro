@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 
 public class editarController {
-    private dashboardC dashboardController;
 
     @FXML
     private ChoiceBox<String> cbMovimiento;
