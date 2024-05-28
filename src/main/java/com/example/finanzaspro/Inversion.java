@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inversion {
-    private double montoMeta;
-    private double tasaRetorno; // Tasa de retorno mensual
-    private int plazoMeses;
-    private List<Double> abonosMensuales;
+    private final double montoMeta;
+    private final double tasaRetorno; // Tasa de retorno mensual
+    private final int plazoMeses;
+    private final List<Double> abonosMensuales;
     private double valorActual; // Nuevo campo para el valor actual
-    private String nombre;
+    private final String nombre;
 
     public Inversion(double montoMeta, double tasaRetorno, int plazoMeses, String nombre) {
         this.montoMeta = montoMeta;
@@ -26,8 +26,7 @@ public class Inversion {
     }
 
     public double calcularMensualidad() {
-        double mensualidad = montoMeta / ((Math.pow(1 + tasaRetorno, plazoMeses) - 1) / tasaRetorno);
-        return mensualidad;
+        return montoMeta / ((Math.pow(1 + tasaRetorno, plazoMeses) - 1) / tasaRetorno);
     }
 
     public double calcularTotalDineroAnadido() {

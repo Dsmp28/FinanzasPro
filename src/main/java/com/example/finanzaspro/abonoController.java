@@ -1,16 +1,12 @@
 package com.example.finanzaspro;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class abonoController {
 
     private int currentIndex;
-
-    @FXML
-    private Button btnAbono;
 
     @FXML
     private TextField txtCantidad;

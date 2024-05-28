@@ -79,7 +79,7 @@
                                           <VBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="162.0">
                                              <children>
                                                 <Label styleClass="txtApartado" text="Valor actual" />
-                                                <Label fx:id="lbRetornoActual" prefHeight="17.0" prefWidth="244.0" styleClass="txtTasa" text="Retorno actual (6.75%)" />
+                                                <Label fx:id="lbRetornoActual" prefHeight="17.0" prefWidth="200.0" styleClass="txtTasa" text="Retorno actual (6.75%)" />
                                              </children>
                                              <HBox.margin>
                                                 <Insets left="15.0" />

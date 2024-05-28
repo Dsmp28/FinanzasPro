@@ -3,10 +3,8 @@ package com.example.finanzaspro;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.ScatterChart;
@@ -14,26 +12,20 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
-import javafx.scene.shape.TriangleMesh;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.plaf.synth.Region;
-import java.awt.*;
+
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
+
 
 public class estadisticasController implements Initializable {
 
@@ -57,7 +49,7 @@ public class estadisticasController implements Initializable {
     }
 
     @FXML
-    public void handleExportar(ActionEvent event) {
+    public void handleExportar() {
         List<String> choices = List.of("Descargar", "Enviar por correo");
         ChoiceDialog<String> dialog = new ChoiceDialog<>("Descargar", choices);
         dialog.setTitle("Exportar Datos");
@@ -66,19 +58,27 @@ public class estadisticasController implements Initializable {
         dialog.setGraphic(null);
 
         Stage alertStage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        alertStage.getIcons().add(new Image(getClass().getResource("icons/cuota.png").toString()));
-        dialog.getDialogPane().getStylesheets().add(getClass().getResource("cssestadisticas.css").toExternalForm());
+        alertStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("icons/cuota.png")).toString()));
+        dialog.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("cssestadisticas.css")).toExternalForm());
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(selected -> {
             if (selected.equals("Descargar")) {
                 guardarCsvEnRutaSeleccionada();
             } else {
-                SendGridEmailService emailService = new SendGridEmailService();
+                try {
+                    SendGridEmailService emailService = new SendGridEmailService();
 
-                StringBuilder message = new StringBuilder();
-                message.append("Estimado/a,\n\n");
-                message.append("Nos complace presentarle sus estadísticas financieras más recientes:");
-                emailService.sendEmailWithAttachment("Estadísticas de movimientos", message.toString(), movimientos);
+                    String message = """
+                        Estimado/a,
+
+                        Nos complace presentarle sus estadísticas financieras más recientes:""";
+
+                    emailService.sendEmailWithAttachment("Estadísticas de movimientos", message, movimientos);
+                    ManejadorAlertas.showInformation("Correo enviado", "Correo enviado con éxito", "El correo se ha enviado correctamente.\n\nRevise su bandeja de entrada o en su defecto su carpeta de spam.");
+
+                } catch (Exception e) {
+                    ManejadorAlertas.showError("Error al enviar el correo", "Ocurrió un error al enviar el correo", e.getMessage());
+                }
             }
         });
     }
@@ -181,8 +181,8 @@ public class estadisticasController implements Initializable {
 
         // Ordenar las listas por fecha
         Comparator<XYChart.Data<String, Number>> comparator = Comparator.comparing(data -> LocalDate.parse(data.getXValue(), formatter));
-        Collections.sort(dataListGastos, comparator);
-        Collections.sort(dataListIngresos, comparator);
+        dataListGastos.sort(comparator);
+        dataListIngresos.sort(comparator);
 
         // Agregar los datos ordenados a las series
         seriesGastos.getData().addAll(dataListGastos);
@@ -203,8 +203,7 @@ public class estadisticasController implements Initializable {
 
         // Asignar el estilo a las leyendas
         for (Node legendItem : chartDispersion.lookupAll(".chart-legend-item")) {
-            if (legendItem instanceof Label) {
-                Label legendLabel = (Label) legendItem;
+            if (legendItem instanceof Label legendLabel) {
                 if (legendLabel.getText().equals("Gastos")) {
                     legendLabel.setGraphic(createLegendShape("triangle", javafx.scene.paint.Color.RED));
                 } else if (legendLabel.getText().equals("Ingresos")) {

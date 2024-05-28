@@ -7,12 +7,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class MovimientoCell extends ListCell<Movimiento> {
-    private HBox content;
-    private ImageView imageView;
-    private Text titulo;
-    private Text categoria;
-    private Text cantidad;
-    private Text fecha;
+    private final HBox content;
+    private final ImageView imageView;
+    private final Text titulo;
+    private final Text categoria;
+    private final Text cantidad;
+    private final Text fecha;
 
     public MovimientoCell() {
         super();
@@ -38,7 +38,7 @@ public class MovimientoCell extends ListCell<Movimiento> {
         vBoxTituloCategoria.setSpacing(5);
 
         content = new HBox(imageView, vBoxTituloCategoria, vBox);
-        content.setHgrow(vBox, javafx.scene.layout.Priority.ALWAYS);
+        HBox.setHgrow(vBox, javafx.scene.layout.Priority.ALWAYS);
         content.setSpacing(10); // Espacio entre la imagen y el texto
         content.setPadding(new javafx.geometry.Insets(5));
         content.setAlignment(javafx.geometry.Pos.CENTER_LEFT);

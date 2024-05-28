@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class InversionController implements Initializable {
@@ -63,11 +64,6 @@ public class InversionController implements Initializable {
     @FXML
     private Button btnAbonar;
 
-    @FXML
-    private Button btnAtras;
-
-    @FXML
-    private Button btnSiguiente;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -83,7 +79,7 @@ public class InversionController implements Initializable {
             Stage emergente = new Stage();
 
             emergente.initModality(Modality.APPLICATION_MODAL);
-            emergente.getIcons().add(new Image(getClass().getResource("icons/finanzas.png").toString()));
+            emergente.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("icons/finanzas.png")).toString()));
             emergente.initStyle(javafx.stage.StageStyle.DECORATED);
             emergente.setResizable(false);
             emergente.setMaximized(false);
@@ -108,7 +104,7 @@ public class InversionController implements Initializable {
             Stage emergente = new Stage();
 
             emergente.initModality(Modality.APPLICATION_MODAL);
-            emergente.getIcons().add(new Image(getClass().getResource("icons/finanzas.png").toString()));
+            emergente.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("icons/finanzas.png")).toString()));
             emergente.initStyle(javafx.stage.StageStyle.DECORATED);
             emergente.setResizable(false);
             emergente.setMaximized(false);
@@ -128,7 +124,7 @@ public class InversionController implements Initializable {
 
     @FXML
     private void eliminarInversion(){
-        if (inversiones.size() > 0){
+        if (!inversiones.isEmpty()){
             ManejadorInversion.eliminarInversion(currentIndex);
             inversiones = ManejadorInversion.getInversiones();
             currentIndex = inversiones.size() - 1;
@@ -177,12 +173,8 @@ public class InversionController implements Initializable {
         lbValorActual.setText("Q. " + String.format("%.2f", inversion.getValorActual()));
         lbTxtTitulo.setText(inversion.getNombre());
         lbMesesAbonados.setText(inversion.getAbonosMensuales().size() + " / " + inversion.getPlazoMeses() + " meses");
-        lbRetornoActual.setText("Tasa mensual actual (" + (int) Math.round(inversion.getTasaRetorno() * 100) + "%)");
-        if (ValidarInversion(inversion)){
-            btnAbonar.setDisable(true);
-        }else {
-            btnAbonar.setDisable(false);
-        }
+        lbRetornoActual.setText("Tasa mensual (" + String.format("%.1f", inversion.getTasaRetorno() * 100) + "%)");
+        btnAbonar.setDisable(ValidarInversion(inversion));
     }
 
     private boolean ValidarInversion(Inversion inversion){

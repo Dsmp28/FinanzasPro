@@ -5,11 +5,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.application.Platform;
 
-public class ManejadorAlertas {
+import java.util.Objects;
 
-    public static void showWarning(String title, String header, String content) {
-        showAlert(AlertType.WARNING, title, header, content);
-    }
+public class ManejadorAlertas {
 
     public static void showInformation(String title, String header, String content) {
         showAlert(AlertType.INFORMATION, title, header, content);
@@ -32,7 +30,7 @@ public class ManejadorAlertas {
             alert.setContentText(content);
 
             alert.setGraphic(null);
-            alert.getDialogPane().getStylesheets().add(ManejadorAlertas.class.getResource("cssestadisticas.css").toExternalForm());
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(ManejadorAlertas.class.getResource("cssestadisticas.css")).toExternalForm());
 
             // Obtener el stage principal si es necesario para aplicaciones que usen múltiples stages
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();

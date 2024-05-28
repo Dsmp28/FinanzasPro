@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -53,7 +54,7 @@ public class MovimientosController implements Initializable, paneController{
         btnRegistrar.setOnAction(event -> {
             if(dashboardController != null){
                 dashboardController.cambiarVista("registro-view.fxml", dashboardController.getBtnRegistrar());
-            };
+            }
         });
     }
 
@@ -64,7 +65,7 @@ public class MovimientosController implements Initializable, paneController{
 
     @FXML
     public void BuscarMovimientos(){
-        BusquedaMovimientos BusquedaMovimientos = new BusquedaMovimientos(ManejadorMovimiento.getMovimientos(), (Categoria) lvCategorias.getSelectionModel().getSelectedItem(), cbMovimiento.getValue().toString(), txtTituloBusqueda.getText().toString());
+        BusquedaMovimientos BusquedaMovimientos = new BusquedaMovimientos(ManejadorMovimiento.getMovimientos(), (Categoria) lvCategorias.getSelectionModel().getSelectedItem(), cbMovimiento.getValue().toString(), txtTituloBusqueda.getText());
         ObservableList<Movimiento> movimientosEncontrados = BusquedaMovimientos.BuscarMovimientos();
         lvMovimientos.itemsProperty().bind(Bindings.createObjectBinding(() -> movimientosEncontrados, movimientosEncontrados));
         lvMovimientos.setCellFactory(listView -> new MovimientoCell());
@@ -82,7 +83,7 @@ public class MovimientosController implements Initializable, paneController{
 
         // Crear una nueva lista y agregar la opción "Todas las categorías" primero
         ObservableList<Categoria> categoriasFinal = FXCollections.observableArrayList();
-        categoriasFinal.add(new Categoria(0, "Todas las categorías", new Image(ManejadorCategoria.class.getResource("icons/TodasCategorias.png").toExternalForm())));
+        categoriasFinal.add(new Categoria(0, "Todas las categorías", new Image(Objects.requireNonNull(ManejadorCategoria.class.getResource("icons/TodasCategorias.png")).toExternalForm())));
 
         // Agregar las demás categorías a la nueva lista
         categoriasFinal.addAll(categoriasFiltradas);
@@ -112,7 +113,7 @@ public class MovimientosController implements Initializable, paneController{
             Stage emergente = new Stage();
 
             emergente.initModality(Modality.APPLICATION_MODAL);
-            emergente.getIcons().add(new Image(getClass().getResource("icons/finanzas.png").toString()));
+            emergente.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("icons/finanzas.png")).toString()));
             emergente.initStyle(javafx.stage.StageStyle.DECORATED);
             emergente.setResizable(false);
             emergente.setMaximized(false);

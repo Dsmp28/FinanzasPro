@@ -37,9 +37,6 @@ public class RegistroController implements Initializable {
     private TextField txtSubcategoria;
 
     @FXML
-    private Button btnIngreso;
-
-    @FXML
     private TextField txtTitulo;
 
     @FXML
@@ -94,8 +91,8 @@ public class RegistroController implements Initializable {
                 int intervaloDias = 0;
                 if (esRecurrente){
                     intervaloDias = Integer.parseInt(txtDias.getText());
-                    if (intervaloDias <= 0){
-                        throw new IllegalArgumentException("El intervalo de días debe ser mayor a 0");
+                    if (intervaloDias <= 0 || intervaloDias > 999999999){
+                        throw new IllegalArgumentException("El intervalo de días debe ser mayor a 0 y menor a 999,999,999");
                     }
                 }
                 LocalDate fecha = dpFecha.getValue();

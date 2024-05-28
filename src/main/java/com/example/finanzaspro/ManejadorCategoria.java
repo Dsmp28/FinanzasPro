@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
+import java.util.Objects;
+
 public class ManejadorCategoria {
 
     private static final ObservableList<Categoria> categorias = FXCollections.observableArrayList();
@@ -19,7 +21,7 @@ public class ManejadorCategoria {
 
     public static void agregarCategoria(String titulo) {
         if (buscarCategoriaPorTitulo(titulo) == null && !titulo.equals("Otra") && !titulo.isEmpty()) {
-            Categoria nuevaCategoria = new Categoria(titulo, new Image(ManejadorCategoria.class.getResource("icons/ImagenPrueba.png").toExternalForm()));
+            Categoria nuevaCategoria = new Categoria(titulo, new Image(Objects.requireNonNull(ManejadorCategoria.class.getResource("icons/ImagenPrueba.png")).toExternalForm()));
             categorias.add(categorias.size() - 1, nuevaCategoria);
             guardarCategoriasEnArchivo();
         }else{
@@ -38,7 +40,7 @@ public class ManejadorCategoria {
 
     public static Categoria buscarCategoriaPorTitulo(String titulo) {
         for (Categoria categoria : categorias) {
-            if (categoria.getTitulo().toLowerCase().equals(titulo.toLowerCase())) {
+            if (categoria.getTitulo().equalsIgnoreCase(titulo)) {
                 return categoria;
             }
         }

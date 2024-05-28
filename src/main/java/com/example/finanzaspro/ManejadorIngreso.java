@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 
 public class ManejadorIngreso {
     private static ManejadorIngreso instancia;
-    private Ingreso ingreso;
+    private final Ingreso ingreso;
 
     private ManejadorIngreso() {
         ObservableList<Categoria> categorias = ManejadorCategoria.getCategorias();

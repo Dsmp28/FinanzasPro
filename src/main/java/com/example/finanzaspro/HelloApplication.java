@@ -1,17 +1,15 @@
 package com.example.finanzaspro;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 public class HelloApplication extends Application {
     @Override
@@ -36,9 +34,9 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 950, 550);
         stage.setTitle("FinanzasProLogIn");
         stage.setScene(scene);
-        String css = this.getClass().getResource("style.css").toExternalForm();
+        String css = Objects.requireNonNull(this.getClass().getResource("style.css")).toExternalForm();
         scene.getStylesheets().add(css);
-        stage.getIcons().add(new Image(getClass().getResource("icons/finanzas.png").toString()));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("icons/finanzas.png")).toString()));
         stage.initStyle(javafx.stage.StageStyle.DECORATED);
         stage.setResizable(false);
         stage.setMaximized(false);
@@ -50,9 +48,9 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 950, 550);
         stage.setTitle("FinanzasProDashBoard");
         stage.setScene(scene);
-        String css = this.getClass().getResource("styledashboard.css").toExternalForm();
+        String css = Objects.requireNonNull(this.getClass().getResource("styledashboard.css")).toExternalForm();
         scene.getStylesheets().add(css);
-        stage.getIcons().add(new Image(getClass().getResource("icons/finanzas.png").toString()));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("icons/finanzas.png")).toString()));
         stage.initStyle(javafx.stage.StageStyle.DECORATED);
         stage.setResizable(false);
         stage.setMaximized(false);

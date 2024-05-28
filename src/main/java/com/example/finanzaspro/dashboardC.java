@@ -186,7 +186,7 @@ public class dashboardC implements Initializable, paneController{
 
     private void CargarRecordatorios(){
         ObservableList<Movimiento> recordatorios = ManejadorMovimiento.getRecordatorios();
-        Collections.sort(recordatorios, Comparator.comparing(Movimiento::calcularDiasRestantes));
+        recordatorios.sort(Comparator.comparing(Movimiento::calcularDiasRestantes));
         lvListaRecordatorios.itemsProperty().bind(Bindings.createObjectBinding(() -> recordatorios, recordatorios));
         lvListaRecordatorios.setCellFactory(listView -> new RecordatorioCell());
     }
@@ -240,7 +240,7 @@ public class dashboardC implements Initializable, paneController{
             Stage emergente = new Stage();
 
             emergente.initModality(Modality.APPLICATION_MODAL);
-            emergente.getIcons().add(new Image(getClass().getResource("icons/finanzas.png").toString()));
+            emergente.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("icons/finanzas.png")).toString()));
             emergente.initStyle(javafx.stage.StageStyle.DECORATED);
             emergente.setResizable(false);
             emergente.setMaximized(false);
@@ -282,7 +282,7 @@ public class dashboardC implements Initializable, paneController{
 
     private void enviarRecordatoriosPorCorreo(ObservableList<Movimiento> recordatorios) {
         StringBuilder cuerpoCorreo = new StringBuilder();
-        cuerpoCorreo.append("Estimado/a,\n\n ");
+        cuerpoCorreo.append("Estimado/a,\n\n");
         cuerpoCorreo.append("Esperamos que esté teniendo un excelente día.\n\n");
         cuerpoCorreo.append("Le recordamos que tiene los siguientes movimientos a menos de 4 dias de suceder:\n\n");
 
@@ -299,7 +299,8 @@ public class dashboardC implements Initializable, paneController{
         try {
             emailService.sendEmail("Recordatorio de Movimientos programados", cuerpoCorreo.toString());
         } catch (Exception e) {
-            e.getMessage();
+            String message = e.getMessage();
+            ManejadorAlertas.showError("Error al enviar correo", "No se pudo enviar el correo electrónico", message);
         }
     }
     public void btnCompleto(){

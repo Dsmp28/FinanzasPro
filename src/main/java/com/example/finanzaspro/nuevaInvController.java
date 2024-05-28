@@ -1,7 +1,6 @@
 package com.example.finanzaspro;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -17,9 +16,6 @@ public class nuevaInvController {
 
     @FXML
     private TextField txtTitulo;
-
-    @FXML
-    private Button txtAggInv;
 
     private Stage stage;
 
