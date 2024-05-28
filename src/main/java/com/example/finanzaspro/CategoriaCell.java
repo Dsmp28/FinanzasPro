@@ -1,15 +1,14 @@
 package com.example.finanzaspro;
 
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 public class CategoriaCell extends ListCell<Categoria> {
-    private HBox content;
-    private Text name;
-    private ImageView imageView;
+    private final HBox content;
+    private final Text name;
+    private final ImageView imageView;
 
     public CategoriaCell() {
         super();
@@ -30,13 +29,6 @@ public class CategoriaCell extends ListCell<Categoria> {
             setGraphic(content);
         } else {
             setGraphic(null);
-        }
-    }
-
-    private void removeImageView() {
-        if (imageView != null) {
-            getChildren().remove(imageView);
-            imageView = null;
         }
     }
 }

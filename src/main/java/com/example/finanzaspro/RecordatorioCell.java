@@ -4,16 +4,15 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class RecordatorioCell extends ListCell<Movimiento> {
-    private HBox content;
-    private ImageView imagen;
-    private Text titulo;
-    private Text categoria;
-    private Text cantidad;
-    private Text diasRestantes;
+    private final HBox content;
+    private final ImageView imagen;
+    private final Text titulo;
+    private final Text categoria;
+    private final Text cantidad;
+    private final Text diasRestantes;
 
     public RecordatorioCell() {
         super();

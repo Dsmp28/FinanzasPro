@@ -15,10 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ManejadorEncriptacion {
 
@@ -230,7 +227,7 @@ public class ManejadorEncriptacion {
                     String titulo = EncryptionUtil.decrypt(datos.get("titulo"));
                     String imagenURL = EncryptionUtil.decrypt(datos.get("imagen")).replaceAll(".*(icons/.*)", "$1");
 
-                    Image imagen = new Image(ManejadorCategoria.class.getResource(imagenURL).toExternalForm());
+                    Image imagen = new Image(Objects.requireNonNull(ManejadorCategoria.class.getResource(imagenURL)).toExternalForm());
                     Categoria categoria = new Categoria(id, titulo, imagen);
 
                     categorias.add(categoria);
@@ -328,7 +325,6 @@ public class ManejadorEncriptacion {
                         double montoMeta = Double.parseDouble(EncryptionUtil.decrypt(datos.get("montoMeta")));
                         double tasaRetorno = Double.parseDouble(EncryptionUtil.decrypt(datos.get("tasaRetorno")));
                         int plazoMeses = Integer.parseInt(EncryptionUtil.decrypt(datos.get("plazoMeses")));
-                        double valorActual = Double.parseDouble(EncryptionUtil.decrypt(datos.get("valorActual")));
 
                         // Desencriptar los abonos mensuales
                         String abonosMensualesJson = datos.get("abonosMensuales");

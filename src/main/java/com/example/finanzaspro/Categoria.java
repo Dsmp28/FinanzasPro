@@ -6,9 +6,9 @@ import javafx.scene.image.Image;
 
 public class Categoria {
     private static int ultimoId = ManejadorEncriptacion.leerCategoriasDeJSON("DatosCategorias.json").size();
-    private int id;
-    private StringProperty titulo;
-    private Image imagen;
+    private final int id;
+    private final StringProperty titulo;
+    private final Image imagen;
 
     public Categoria(String titulo, Image imagen) {
         this.id = ++ultimoId;

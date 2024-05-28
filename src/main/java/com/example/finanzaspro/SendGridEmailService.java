@@ -17,7 +17,7 @@ import javafx.collections.ObservableList;
 
 public class SendGridEmailService {
 
-    private String apiKey;
+    private final String apiKey;
 
     public SendGridEmailService() {
         this.apiKey = ManejadorEncriptacion.leerTextoDeJSON("ApiKey.json", "apiKey");

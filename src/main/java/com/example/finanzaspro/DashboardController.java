@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -37,8 +38,6 @@ public class DashboardController implements Initializable {
 
         @FXML
         private Button btnEstadistica;
-        @FXML
-        private Button btnConfiguracion;
 
         @FXML
         private StackPane contentArea;
@@ -75,29 +74,19 @@ public class DashboardController implements Initializable {
         }
     }
     public void BtnInicio(){
-        btnInicio.setOnAction(event -> {
-            botonActivo(btnInicio, "dashboard.fxml");
-        });
+        btnInicio.setOnAction(event -> botonActivo(btnInicio, "dashboard.fxml"));
     }
     public void btnRegistro() {
-        btnRegistrar.setOnAction(event -> {
-            botonActivo(btnRegistrar, "registro-view.fxml");
-        });
+        btnRegistrar.setOnAction(event -> botonActivo(btnRegistrar, "registro-view.fxml"));
     }
     public void btnTransaccion() {
-        btnTransaccion.setOnAction(event -> {
-            botonActivo(btnTransaccion, "movimientos-view.fxml");
-        });
+        btnTransaccion.setOnAction(event -> botonActivo(btnTransaccion, "movimientos-view.fxml"));
     }
     public void btnInversion(){
-        btnInversion.setOnAction(event -> {
-            botonActivo(btnInversion, "inversion-view.fxml");
-        });
+        btnInversion.setOnAction(event -> botonActivo(btnInversion, "inversion-view.fxml"));
     }
     public void btnEstadistica(){
-        btnEstadistica.setOnAction(event -> {
-            botonActivo(btnEstadistica, "estadisticas-view.fxml");
-        });
+        btnEstadistica.setOnAction(event -> botonActivo(btnEstadistica, "estadisticas-view.fxml"));
     }
     public void btnConfiguracion(){
         TextInputDialog dialog = new TextInputDialog();
@@ -106,7 +95,7 @@ public class DashboardController implements Initializable {
         dialog.setContentText("Escriba el email nuevo o actualice el anterior:");
         dialog.getEditor().setText(ManejadorEncriptacion.leerCorreoDeJSON("DatoCorreo.json"));
         dialog.setGraphic(null);
-        dialog.getDialogPane().getStylesheets().add(getClass().getResource("cssestadisticas.css").toExternalForm());
+        dialog.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("cssestadisticas.css")).toExternalForm());
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(email -> {
             if (!email.isEmpty()){
@@ -131,16 +120,14 @@ public class DashboardController implements Initializable {
 
 
     public void btnSalir(){
-        btnSalir.setOnAction(event -> {
-            salir();
-        });
+        btnSalir.setOnAction(event -> salir());
     }
     private void salir(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Salir");
         alert.setHeaderText("¿Estás seguro de que deseas salir?");
         alert.setGraphic(null);
-        alert.getDialogPane().getStylesheets().add(getClass().getResource("cssestadisticas.css").toExternalForm());
+        alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("cssestadisticas.css")).toExternalForm());
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK){
             Stage stage = (Stage) btnSalir.getScene().getWindow();

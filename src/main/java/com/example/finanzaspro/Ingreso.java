@@ -2,11 +2,10 @@ package com.example.finanzaspro;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.StringProperty;
 
 public class Ingreso {
 
-    private DoubleProperty monto;
+    private final DoubleProperty monto;
 
     public Ingreso(double monto) {
         this.monto = new SimpleDoubleProperty(monto);

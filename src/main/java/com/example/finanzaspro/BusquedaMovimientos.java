@@ -4,10 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class BusquedaMovimientos {
-    private ObservableList<Movimiento> movimientos;
-    private Categoria categoriaElegida;
+    private final ObservableList<Movimiento> movimientos;
+    private final Categoria categoriaElegida;
     private String tipo;
-    private String titulo;
+    private final String titulo;
 
     public BusquedaMovimientos(ObservableList<Movimiento> movimientos, Categoria categoriaElegida, String tipo, String titulo) {
         this.movimientos = movimientos;
